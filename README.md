@@ -1,3 +1,5 @@
+# [原项目查考](https://github.com/guangee/demo_upload)
+
 1. 原生上传
 2. Minio上传
 3. s3上传
@@ -10,8 +12,12 @@
 3. 学习使用S3的[Java SDK](https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/ObjectOperations.html)上传
 
 ```
-# docker启动文件服务器
-docker run -d -p 9000:9000 -e MINIO_ACCESS_KEY=admin -e MINIO_SECRET_KEY=admin123 -v /mnt/data/oss:/data minio/minio server /data
+//docker安装minio
+docker pull minio/minio
+// docker启动文件服务器
+ docker run -d -p 9000:9000 -e MINIO_ACCESS_KEY=admin -e MINIO_SECRET_KEY=admin123 -v /mnt/data/oss:/data minio/minio server /data 
+// 简易启动方式
+docker run -p 9000:9000 minio/minio server /data 
 ```
 
 > MinIO 是一个基于Apache License v2.0开源协议的对象存储服务。它兼容亚马逊S3云存储服务接口，非常适合于存储大容量非结构化的数据，例如图片、视频、日志文件、备份数据和容器/虚拟机镜像等，而一个对象文件可以是任意大小，从几kb到最大5T不等。
