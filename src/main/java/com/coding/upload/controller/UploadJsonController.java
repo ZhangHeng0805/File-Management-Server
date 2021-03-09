@@ -44,7 +44,7 @@ public class UploadJsonController {
         String msg="";
         Result result=new Result();
         if (username!=null&&password!=null){
-        if (username.equals("张恒")&&password.equals("305666")){
+        if (username.equals("星曦向荣")&&password.equals("305666")){//设置用户名和密码
         if (!file.isEmpty()) {
             log.info("文件名：{}", file.getOriginalFilename());
             log.info("大小：{}字节", file.getSize());
