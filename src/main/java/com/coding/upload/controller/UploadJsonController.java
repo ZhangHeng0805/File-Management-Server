@@ -42,6 +42,7 @@ public class UploadJsonController {
     public Result upload(MultipartFile file,
                         @Nullable @RequestParam("username") String username,
                          @Nullable @RequestParam("password") String password)  {
+        String tit="";
         String msg="";
         Result result=new Result();
         String fileType = FiletypeUtil.getFileType(file.getOriginalFilename());
@@ -61,22 +62,28 @@ public class UploadJsonController {
 
             try {
                 FileUtils.copyToFile(file.getInputStream(), outFile);
-                msg="上传成功！";
-                result.setMessage(name);
+                tit="上传成功！";
+                msg=name;
             } catch (IOException e) {
                 e.printStackTrace();
-                msg="错误："+e.getMessage();
+                tit="错误！";
+                msg=e.getMessage();
             }
         }else {
-            msg="上传失败！文件为空";
+            tit="上传失败！";
+            msg="文件为空";
         }
         } else {
+            tit="账号错误";
             msg="用户名或密码错误！";
         }}else {
+            tit="账号为空";
             msg="用户名或密码不能为空！";
         }
-        result.setTitle(msg);
-        log.info("上传结果："+msg);
+        result.setTitle(tit);
+        result.setMessage(msg);
+        log.info("上传结果标题："+tit);
+        log.info("上传结果信息："+msg);
         return result;
     }
 
