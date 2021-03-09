@@ -1,6 +1,7 @@
 package com.coding.upload.controller;
 
 import com.coding.upload.entity.Result;
+import com.coding.upload.util.FiletypeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -43,14 +44,19 @@ public class UploadJsonController {
                          @Nullable @RequestParam("password") String password)  {
         String msg="";
         Result result=new Result();
+        String fileType = FiletypeUtil.getFileType(file.getOriginalFilename());
         if (username!=null&&password!=null){
         if (username.equals("星曦向荣")&&password.equals("305666")){//设置用户名和密码
         if (!file.isEmpty()) {
             log.info("文件名：{}", file.getOriginalFilename());
             log.info("大小：{}字节", file.getSize());
-             String name= /*UUID.randomUUID().toString()*/
-                     new SimpleDateFormat("yyyy-MM-dd/HH-mm-ss_SSS").format(new Date())
-                             + "@" + file.getOriginalFilename();
+//             String name= /*UUID.randomUUID().toString()*/
+//                     new SimpleDateFormat("yyyy-MM-dd/HH-mm-ss_SSS").format(new Date())
+//                             + "@" + file.getOriginalFilename();
+            String name=fileType+"/"
+                    +"星曦向荣网"
+                    + UUID.randomUUID().toString().substring(0,5)
+                    + "@" + file.getOriginalFilename();
             File outFile = new File(baseDir + name);
 
             try {
