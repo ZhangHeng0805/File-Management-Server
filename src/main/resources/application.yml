@@ -1,6 +1,22 @@
 server:
-  port: 8888
+  port: 8081
+  servlet:
+    encoding:
+      charset: UTF-8
+  tomcat:
+    max-http-form-post-size: 100MB
+
 spring:
   servlet:
     multipart:
       max-file-size: 100MB
+      max-request-size: 100MB
+  mvc:
+    static-path-pattern: /static/**
+  thymeleaf:
+    cache: false
+logging:
+  pattern:
+    file: ../log日志
+
+

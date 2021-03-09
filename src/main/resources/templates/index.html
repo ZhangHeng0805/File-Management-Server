@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${msg==null?'文件上传':msg}">文件上传</title>
+    <script>
+        function sub1() {
+            var name=document.forms["uploadfrom"]["username"].value;
+            var password=document.forms["uploadfrom"]["password"].value;
+            var filename=document.forms["uploadfrom"]["file"].value;
+            // alert(filename);
+            var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+            var file = fileSystem.GetFile (filename);
+            var filemaxsize = 1024*100;//100M
+            if (name.length>1&&password.length>1){
+                if (file.Size>0){
+                    if (file.Size<filemaxsize){
+                        return true;
+                    } else {
+                        alert("文件大小超过限制："+filemaxsize+"M");
+                        return false;
+                    }
+                }else {
+                    alert("上传文件为空");
+                    return false;
+                }
+            } else {
+                alert("姓名或密码不能为空！");
+                return false;
+            }
+            return false;
+        }
+
+    </script>
+    <style>
+        body{
+            padding: 15px;
+        }
+        input{
+            font-size: 20px;
+        }
+        p{
+            background: #fff8c1;
+        }
+    </style>
+</head>
+<body style="font-size: 20px;background: lightcyan">
+<img th:src="@{/static/favicon.ico}">
+
+<h2>文件上传(100M以内)</h2>
+<form method="post" name="uploadfrom" th:action="@{/uploadhtml/files}" enctype="multipart/form-data" onsubmit="return sub1()">
+    账号：<input type="text" name="username" placeholder="请输入上传用户名"><br>
+    密码：<input type="password" name="password" placeholder="请输入上传密码"><br><br>
+    <input type="file" name="file" >
+    <input type="submit" value="提       交">
+</form>
+<p>[[${msg}]]<a target="_blank" th:href="@{'/downloads/show/'+${name}}" th:if="${msg}=='上传成功！'"><label>[[${name}]]</label></a></p>
+
+<h2>文件查看/下载</h2>
+<form id="form1" method="get" th:action="@{/downloads/download}"th:target="${err1==null?'_blank':''}">
+    <input type="text" name="name"placeholder="请输入文件全称" >
+    <input type="submit" value="查          找">
+</form>
+<p th:if="${err1}!=null">[[${err1}]]</p>
+
+</body>
+</html>

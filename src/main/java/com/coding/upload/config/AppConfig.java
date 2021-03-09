@@ -19,9 +19,9 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class AppConfig {
-    private String s3Url = "http://10.211.55.35:9000";
-    private String accessKey = "admin";
-    private String secretKey = "admin123";
+    private String s3Url = "http://192.168.194.205:9000";
+    private String accessKey = "minioadmin";
+    private String secretKey = "minioadmin";
 
     @Bean
     public MinioClient s3Client() throws InvalidPortException, InvalidEndpointException {

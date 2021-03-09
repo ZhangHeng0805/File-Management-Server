@@ -4,6 +4,9 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,13 +17,15 @@ import java.util.UUID;
 /**
  * @author guanweiming
  */
-@Slf4j
-@AllArgsConstructor
+//@Slf4j
+//@AllArgsConstructor
 @RequestMapping("s3")
 @RestController
 public class S3Controller {
 
-    private final AmazonS3 s3;
+    @Autowired
+    private AmazonS3 s3;
+    Logger log = LoggerFactory.getLogger(getClass());
 
     @PostMapping("files")
     public String upload(MultipartFile file) throws Exception {

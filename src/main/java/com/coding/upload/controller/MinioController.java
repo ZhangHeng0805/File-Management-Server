@@ -3,27 +3,40 @@ package com.coding.upload.controller;
 import io.minio.MinioClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 /**
  * @author guanweiming
  */
-@Slf4j
-@AllArgsConstructor
+//@Slf4j
+//@AllArgsConstructor
 @RequestMapping("minio")
 @RestController
 public class MinioController {
 
-    private final MinioClient minioClient;
+    @Autowired
+    private MinioClient minioClient;
+
+
+
+    Logger log = LoggerFactory.getLogger(getClass());
+
+
 
     @PostMapping("files")
     public String upload(MultipartFile file) throws Exception {
         log.info("getOriginalFilename:{}", file.getOriginalFilename());
         log.info("getSize:{}", file.getSize());
-        String name = UUID.randomUUID().toString() + "-" + file.getOriginalFilename();
+        String name = new SimpleDateFormat("yyyy-MM-dd/HH-mm-ss_SSS").format(new Date())
+                + "@" + file.getOriginalFilename();
         // 检查存储桶是否已经存在
         boolean isExist = minioClient.bucketExists("files");
         if (isExist) {
