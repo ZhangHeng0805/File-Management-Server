@@ -15,8 +15,9 @@ spring:
     static-path-pattern: /static/**
   thymeleaf:
     cache: false
+
 logging:
-  pattern:
-    file: /log日志
+  file:
+    name: log日志/文件服务器日志.log
 
 
