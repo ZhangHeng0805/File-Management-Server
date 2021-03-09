@@ -8,7 +8,7 @@
 * 上传功能新增用户验证
 * 上传结果返回形式分为HTML页面格式和JSON格式（可以用作Android应用的数据返回格式）
 
-文件上传下载
+## 文件上传下载
 1. SpringBoot原生文件上传下载，图片在线浏览
 2. 使用[Minio](https://docs.min.io/cn/)作为文件服务器
 3. 学习使用S3的[Java SDK](https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/ObjectOperations.html)上传
@@ -17,10 +17,10 @@
 
 ```
 //docker安装minio
-docker pull minio/minio
+ docker pull minio/minio
 // docker启动文件服务器
  docker run -d -p 9000:9000 -e MINIO_ACCESS_KEY=admin -e MINIO_SECRET_KEY=admin123 -v /mnt/data/oss:/data minio/minio server /data 
 // 简易启动方式
-docker run -p 9000:9000 minio/minio server /data 
+ docker run -p 9000:9000 minio/minio server /data 
 ```
 
