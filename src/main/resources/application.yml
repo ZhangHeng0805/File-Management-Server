@@ -17,6 +17,6 @@ spring:
     cache: false
 logging:
   pattern:
-    file: ../log日志
+    file: /log日志
 
 
