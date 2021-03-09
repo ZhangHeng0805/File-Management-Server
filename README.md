@@ -1,4 +1,4 @@
-# [原项目查考](https://github.com/guangee/demo_upload)
+# [原项目参考](https://github.com/guangee/demo_upload)
 
 1. 原生上传
 2. Minio上传
