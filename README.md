@@ -23,4 +23,28 @@
 // 简易启动方式
  docker run -p 9000:9000 minio/minio server /data 
 ```
+## 配置说明
+> * 端口：8081
+> + 上传文件保存的文件夹：files
+> #### 文件上传
+> * HTML访问文件上传的访问地址：localhost:8081/
+>   * 上传参数（post）
+>       + username
+>       + password
+>       + file文件
+>   + HTML页面提交地址：localhost:8081/uploadhtml/files
+>   + 返回格式Model
+> * 网址访问文件上传的访问地址：localhost:8081/uploadjson/files
+>   * 上传参数（post）
+>       + username
+>       + password
+>       + file文件
+>   + 返回格式Json对象
+> #### 文件下载
+> + 文件展示及下载地址：localhost:8081/downloads/show/文件的全路径
+>    + 这种直接在地址后面拼接即可
+>    + 示例：http://localhost:8081/downloads/show/image/星曦向荣网c4462@错误码.png
+> + 另一个下载方式：http://localhost:8081/downloads/download（这种方式下载时的文件名陈是download，有点bug）
+>      + 参数（get）：
+>           + name :输入文件的全路径，例：image/星曦向荣网c4462@错误码.png
 
