@@ -44,8 +44,8 @@
 > #### 文件下载
 > + 文件展示及下载地址：localhost:8081/downloads/show/文件的全路径
 >    + 这种直接在地址后面拼接即可
->    + 示例：http://localhost:8081/downloads/show/image/星曦向荣网c4462@错误码.png
-> + 另一个下载方式：http://localhost:8081/downloads/download（这种方式下载时的文件名陈是download，有点bug）
+>    + 示例：`http://localhost:8081/downloads/show/image/星曦向荣网c4462@错误码.png`
+> + 另一个下载方式：`http://localhost:8081/downloads/download`（这种方式下载时的文件名陈是download，有点bug）
 >      + 参数（get）：
 >           + name :输入文件的全路径，例：image/星曦向荣网c4462@错误码.png
 
