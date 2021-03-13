@@ -1,5 +1,6 @@
 package com.coding.upload.controller;
 
+import com.coding.upload.entity.Result;
 import com.coding.upload.util.CusAccessObjectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -41,22 +42,32 @@ public class DownloadController {
     }
 
     @GetMapping("show/{time}/{name:.+}")
-    public void show(@PathVariable("name") String name,
-                     @PathVariable("time") String time, HttpServletRequest request,
-                     HttpServletResponse response) {
+    public Result show(@PathVariable("name") String name,
+                       @PathVariable("time") String time, HttpServletRequest request,
+                       HttpServletResponse response) {
+        Result result=new Result();
         String user_agent = CusAccessObjectUtil.getUser_Agent(request);
         String ipAddress = CusAccessObjectUtil.getIpAddress(request);
         log.info("下载请求头："+user_agent);
         log.info("下载IP："+ipAddress);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         File file = new File(baseDir + time+"/"+name);
+        log.info("下载文件："+file.getPath());
         FileInputStream input = null;
         try {
             input = FileUtils.openInputStream(file);
             IOUtils.copy(input, response.getOutputStream());
+            result.setTitle("请求成功");
+            result.setMessage(file.getName());
         } catch (IOException e) {
+            if (e.toString().indexOf("does not exist")>1){
+                result.setTitle("错误:404");
+            }else {
+                result.setTitle("错误");
+            }
+            result.setMessage(e.getMessage());
             e.printStackTrace();
         }
-
+        return result;
     }
 }
