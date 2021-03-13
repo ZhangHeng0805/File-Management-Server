@@ -1,5 +1,7 @@
 package com.coding.upload.controller;
 
+import com.coding.upload.util.CusAccessObjectUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -10,11 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+
 
 @RequestMapping("downloads")
 @RestController
@@ -38,8 +42,12 @@ public class DownloadController {
 
     @GetMapping("show/{time}/{name:.+}")
     public void show(@PathVariable("name") String name,
-                     @PathVariable("time") String time,
+                     @PathVariable("time") String time, HttpServletRequest request,
                      HttpServletResponse response) {
+        String user_agent = CusAccessObjectUtil.getUser_Agent(request);
+        String ipAddress = CusAccessObjectUtil.getIpAddress(request);
+        log.info("下载请求头："+user_agent);
+        log.info("下载IP："+ipAddress);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         File file = new File(baseDir + time+"/"+name);
         FileInputStream input = null;
