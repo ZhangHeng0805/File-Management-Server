@@ -9,10 +9,10 @@
             var password=document.forms["uploadfrom"]["password"].value;
             var filename=document.forms["uploadfrom"]["file"].value;
             // alert(filename);
-            var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
-            var file = fileSystem.GetFile (filename);
+            // var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+            // var file = fileSystem.GetFile (filename);
             var filemaxsize = 1024*100;//100M
-            if (name.length>1&&password.length>1){
+            if (name.length>0&&password.length>0){
                 if (file.Size>0){
                     if (file.Size<filemaxsize){
                         return true;
