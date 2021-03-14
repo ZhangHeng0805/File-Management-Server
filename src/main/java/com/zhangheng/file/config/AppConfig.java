@@ -8,9 +8,11 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.zhangheng.file.entity.S3Config;
 import io.minio.MinioClient;
 import io.minio.errors.InvalidEndpointException;
 import io.minio.errors.InvalidPortException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,9 +21,12 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class AppConfig {
-    private String s3Url = "http://192.168.194.205:9000";
-    private String accessKey = "minioadmin";
-    private String secretKey = "minioadmin";
+    @Autowired
+    S3Config s3Config;
+
+    private String s3Url = s3Config.getS3Url();
+    private String accessKey = s3Config.getAccessKey();
+    private String secretKey = s3Config.getSecretKey();
 
     @Bean
     public MinioClient s3Client() throws InvalidPortException, InvalidEndpointException {

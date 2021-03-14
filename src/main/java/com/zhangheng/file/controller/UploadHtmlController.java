@@ -1,9 +1,11 @@
 package com.zhangheng.file.controller;
 
+import com.zhangheng.file.entity.User;
 import com.zhangheng.file.util.FiletypeUtil;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +22,11 @@ import java.util.UUID;
 @Controller
 public class UploadHtmlController {
     private static String baseDir = "files/";
+    @Autowired
+    User user;
 
     Logger log = LoggerFactory.getLogger(getClass());
+
 
 
     @PostMapping("files")
@@ -30,7 +35,7 @@ public class UploadHtmlController {
                          @Nullable @RequestParam("password") String password)  {
         String msg="";
         if (username!=null&&password!=null){
-            if (username.equals("星曦向荣")&&password.equals("305666")){//设置上传的用户名和密码
+            if (username.equals(user.getUsername())&&password.equals(user.getPassword())){//设置上传的用户名和密码
                 if (!file.isEmpty()) {
                     String fileType = FiletypeUtil.getFileType(file.getOriginalFilename());
                     log.info("文件名：{}", file.getOriginalFilename());

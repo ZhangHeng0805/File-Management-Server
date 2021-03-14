@@ -1,10 +1,12 @@
 package com.zhangheng.file.controller;
 
 import com.zhangheng.file.entity.Result;
+import com.zhangheng.file.entity.User;
 import com.zhangheng.file.util.FiletypeUtil;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +22,8 @@ import java.util.UUID;
 @RequestMapping("uploadjson")
 @RestController
 public class UploadJsonController {
-
+    @Autowired
+    User user;
     private static String baseDir = "files/";
 
     Logger log = LoggerFactory.getLogger(getClass());
@@ -35,7 +38,7 @@ public class UploadJsonController {
         Result result=new Result();
         String fileType = FiletypeUtil.getFileType(file.getOriginalFilename());
         if (username!=null&&password!=null){
-        if (username.equals("星曦向荣")&&password.equals("305666")){//设置用户名和密码
+        if (username.equals(user.getUsername())&&password.equals(user.getPassword())){//设置用户名和密码
         if (!file.isEmpty()) {
             log.info("文件名：{}", file.getOriginalFilename());
             log.info("大小：{}字节", file.getSize());

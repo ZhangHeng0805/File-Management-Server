@@ -27,6 +27,20 @@
 > + 端口：8081
 > + 上传文件保存的文件夹：files
 > + 日志保存的路径：log日志/文件服务器日志.log
+### 账户设置
++ application.properties(全局配置文件)
+```properties
+# 账户设置
+user.username = 星曦向荣
+user.password = 305666
+
+# Minio的连接配置
+s3.s3Url = http://192.168.194.205:9000
+s3.accessKey = minioadmin
+s3.secretKey = minioadmin
+```
+> 可以在jar包外部创建一个新的application.properties(全局配置文件)修改其中的数据，并和jar包放在同一个文件夹内；在启动运行时，外部的application.properties(全局配置文件)会覆盖掉jar内部的配置文件，从而实现修改账户的目的
+
 > #### 文件上传
 > * HTML访问文件上传的访问地址：localhost:8081/
 >   * 上传参数（post）
