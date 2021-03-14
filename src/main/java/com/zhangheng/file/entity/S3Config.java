@@ -3,8 +3,8 @@ package com.zhangheng.file.entity;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Component
-@ConfigurationProperties(prefix = "s3")
+@Component(value = "s3config")
+@ConfigurationProperties(prefix = "s3config")
 public class S3Config {
     private String s3Url; //"http://192.168.194.205:9000";
     private String accessKey; //"minioadmin";

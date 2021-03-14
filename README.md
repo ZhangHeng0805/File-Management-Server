@@ -31,8 +31,8 @@
 + application.properties(全局配置文件)
 ```properties
 # 账户设置
-user.username = 星曦向荣
-user.password = 305666
+user.username = zhangheng
+user.password = 123456
 
 # Minio的连接配置
 s3.s3Url = http://192.168.194.205:9000
