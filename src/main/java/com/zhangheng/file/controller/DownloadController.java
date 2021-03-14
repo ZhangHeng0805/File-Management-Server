@@ -1,8 +1,7 @@
-package com.coding.upload.controller;
+package com.zhangheng.file.controller;
 
-import com.coding.upload.entity.Result;
-import com.coding.upload.util.CusAccessObjectUtil;
-import lombok.extern.slf4j.Slf4j;
+import com.zhangheng.file.entity.Result;
+import com.zhangheng.file.util.CusAccessObjectUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;

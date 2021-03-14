@@ -1,4 +1,4 @@
-package com.coding.upload.controller;
+package com.zhangheng.file.controller;
 
 import io.minio.MinioClient;
 import lombok.AllArgsConstructor;

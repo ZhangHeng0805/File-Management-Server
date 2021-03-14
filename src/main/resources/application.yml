@@ -17,14 +17,12 @@ spring:
     cache: false
   banner:
     image:
-      location: classpath:/static/img/123.png
+      location: classpath:static/img/123.png
       pixelmode: text
     location: classpath:banner.txt
 
 logging:
-  file:
-    name: log日志/文件服务器日志.log
-  pattern:
-    rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz
-
+  config: classpath:logging.xml
+#  file:
+#    name: log日志/文件服务器日志.log
 

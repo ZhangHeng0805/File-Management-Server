@@ -1,4 +1,4 @@
-package com.coding.upload.util;
+package com.zhangheng.file.util;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,4 +1,4 @@
-package com.coding.upload.entity;
+package com.zhangheng.file.entity;
 
 public class Result {
     private String title;

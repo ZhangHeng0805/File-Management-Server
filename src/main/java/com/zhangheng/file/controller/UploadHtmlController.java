@@ -1,7 +1,6 @@
-package com.coding.upload.controller;
+package com.zhangheng.file.controller;
 
-import com.coding.upload.entity.Result;
-import com.coding.upload.util.FiletypeUtil;
+import com.zhangheng.file.util.FiletypeUtil;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,13 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 
 @RequestMapping("uploadhtml")
@@ -46,7 +42,7 @@ public class UploadHtmlController {
                     String name=fileType+"/"
                             +"星曦向荣网"
                             + UUID.randomUUID().toString().substring(0,5)
-                            + "@" + file.getOriginalFilename();
+                            + "_" + file.getOriginalFilename();
                     File outFile = new File(baseDir + name);
 
                     try {

@@ -1,4 +1,4 @@
-package com.coding.upload.config;
+package com.zhangheng.file.config;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;

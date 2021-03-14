@@ -1,4 +1,4 @@
-package com.coding.upload.controller;
+package com.zhangheng.file.controller;
 
 import org.apache.tomcat.util.file.ConfigurationSource;
 import org.springframework.stereotype.Controller;

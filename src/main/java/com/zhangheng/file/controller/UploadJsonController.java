@@ -1,28 +1,16 @@
-package com.coding.upload.controller;
+package com.zhangheng.file.controller;
 
-import com.coding.upload.entity.Result;
-import com.coding.upload.util.FiletypeUtil;
-import lombok.extern.slf4j.Slf4j;
+import com.zhangheng.file.entity.Result;
+import com.zhangheng.file.util.FiletypeUtil;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -40,7 +28,7 @@ public class UploadJsonController {
 
     @PostMapping("files")
     public Result upload(MultipartFile file,
-                        @Nullable @RequestParam("username") String username,
+                         @Nullable @RequestParam("username") String username,
                          @Nullable @RequestParam("password") String password)  {
         String tit="";
         String msg="";
@@ -57,7 +45,7 @@ public class UploadJsonController {
             String name=fileType+"/"
                     +"星曦向荣网"
                     + UUID.randomUUID().toString().substring(0,5)
-                    + "@" + file.getOriginalFilename();
+                    + "_" + file.getOriginalFilename();
             File outFile = new File(baseDir + name);
 
             try {

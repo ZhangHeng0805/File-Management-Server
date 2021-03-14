@@ -1,4 +1,4 @@
-package com.coding.upload.config;
+package com.zhangheng.file.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
