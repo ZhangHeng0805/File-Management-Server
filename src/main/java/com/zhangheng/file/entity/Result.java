@@ -1,5 +1,8 @@
 package com.zhangheng.file.entity;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Result {
     private String title;
     private String message;
