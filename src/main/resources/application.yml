@@ -11,6 +11,9 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+  output:
+    ansi:
+      enabled: always
   mvc:
     static-path-pattern: /static/**
   thymeleaf:
