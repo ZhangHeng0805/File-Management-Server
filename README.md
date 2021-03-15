@@ -70,7 +70,7 @@ s3.secretKey = minioadmin
 
     <contextName>logback</contextName>
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <property name="log.path" value="E:\\log\\logback.log" />
+    <property name="log.path" value="E:\\log日志\\logback.log" />
 
     <!--输出到控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -90,7 +90,7 @@ s3.secretKey = minioadmin
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logback.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
+            <fileNamePattern>log日志/%d{yyyy-MM-dd}_%i.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
