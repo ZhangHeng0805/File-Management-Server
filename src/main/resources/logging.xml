@@ -1,4 +1,3 @@
-
 <configuration>
     <!-- 控制台输出log信息 -->
     <appender name="File" class="ch.qos.logback.core.ConsoleAppender">
@@ -7,7 +6,9 @@
         </filter>
         <withJansi>true</withJansi>
         <encoder>
-            <pattern>%green(%d{yyyy-MM-dd HH:mm:ss}) [%thread] %cyan(%-5level) %blue(%logger) - %msg%n</pattern>
+            <!--<pattern>%green(%d{yyyy-MM-dd HH:mm:ss}) [%thread] %cyan(%-5level) %blue(%logger) - %msg%n</pattern>-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} --- %msg%n</pattern>
+
         </encoder>
     </appender>
 

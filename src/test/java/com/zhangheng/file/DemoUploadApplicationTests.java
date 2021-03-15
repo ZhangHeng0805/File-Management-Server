@@ -22,9 +22,9 @@ class DemoUploadApplicationTests {
         System.out.println(s3Config);
         System.out.println("_____________");
         try {
-            ArrayList<Object> files = FolderFileScanner.scanFilesWithNoRecursion("files");
+//            ArrayList<Object> files = FolderFileScanner.scanFilesWithNoRecursion("files");
 //            ArrayList<Object> files1 = FolderFileScanner.scanFilesWithRecursion("files");
-            System.out.println(files);
+//            System.out.println(files);
             System.out.println("_____________");
 //            System.out.println(files1);
         } catch (Exception e) {

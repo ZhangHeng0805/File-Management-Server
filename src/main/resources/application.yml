@@ -19,10 +19,8 @@ spring:
   thymeleaf:
     cache: false
   banner:
-    image:
-      location: classpath:static/img/123.png
-      pixelmode: text
     location: classpath:banner.txt
+
 
 logging:
   config: classpath:logging.xml
