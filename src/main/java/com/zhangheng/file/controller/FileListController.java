@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 * */
 @Slf4j
 @RequestMapping("filelist")
-@RestController
+@Controller
 public class FileListController {
 
     Logger log=LoggerFactory.getLogger(getClass());
@@ -25,8 +27,10 @@ public class FileListController {
     private User user;
     ArrayList<Object> files = new ArrayList<>();
 
+
+    @ResponseBody
     @PostMapping("jsonlist/{type}")
-    public ArrayList<String> jsonFileList1(@PathVariable("type") @RequestParam("type") String type,
+    public ArrayList<String> jsonFileList1(@PathVariable("type") String type,
                                           @Nullable @RequestParam("username") String username,
                                           @Nullable @RequestParam("password") String password){
         ArrayList<String> list = new ArrayList<>();
@@ -65,8 +69,10 @@ public class FileListController {
                         for (Object o : files) {
                             String s1 = "";
                             String s = String.valueOf(o);
+
                             if (s.indexOf("files") > 1) {
                                 s1 = s.substring(s.indexOf("files") + 6);
+                                s1=s1.replace("\\","/");
                             } else {
                                 s1 = s;
                             }
@@ -88,10 +94,12 @@ public class FileListController {
         }
         return list;
     }
-    @PostMapping("jsonlist")
-    public ArrayList<String> jsonFileList2(@Nullable @RequestParam("type") String type,
+    @PostMapping("htmllist")
+    public String jsonFileList2(@Nullable @RequestParam("type") String type,
                                           @Nullable @RequestParam("username") String username,
-                                          @Nullable @RequestParam("password") String password){
+                                          @Nullable @RequestParam("password") String password,
+                                           Model model
+                                           ){
         ArrayList<String> list = new ArrayList<>();
         list.clear();
         if (username!=null&&password!=null) {
@@ -149,6 +157,7 @@ public class FileListController {
             log.warn("请输入账号和密码");
             list.add("请输入账号和密码");
         }
-        return list;
+        model.addAttribute("list",list);
+        return "forward:/";
     }
 }

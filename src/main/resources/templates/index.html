@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${msg==null?'文件上传':msg}">文件上传</title>
+    <title th:text="${msg==null?'文件管理系统':msg}">文件上传</title>
     <script>
         function sub1() {
+            submit1();
             var name=document.forms["uploadfrom"]["username"].value;
             var password=document.forms["uploadfrom"]["password"].value;
             var filename=document.forms["uploadfrom"]["file"].value;
@@ -31,37 +32,144 @@
             return false;
         }
 
+        function sub2() {
+            submit2();
+            var name = document.forms["listfrom"]["username"].value;
+            var password = document.forms["listfrom"]["password"].value;
+            if (name.length<1||password.length<1){
+                alert("账号密码不能为空")
+                return false;
+            }else {
+                return true;
+            }
+        }
+        function sub3() {
+            submit3();
+            var name = document.forms["downform"]["name"].value;
+            if (name.length<1){
+                alert("请输入文件全称")
+                return false;
+            } else {
+                return true;
+            }
+        }
+        function submit1() {
+            var t=3;
+            var i;
+            var login=document.getElementById("btnGo1");
+            login.disabled="disabled";
+            function run() {
+                if (t>0) {
+                    login.value=t+"秒后可操作";
+                    t--;
+                }else {
+                    login.disabled="";
+                    clearInterval(i);
+                    login.value="提                  交";
+                }
+            }
+            i=setInterval(run,1000);
+        }
+        function submit2() {
+            var t=3;
+            var i;
+            var login=document.getElementById("btnGo2");
+            login.disabled="disabled";
+            function run() {
+                if (t>0) {
+                    login.value=t+"秒后可操作";
+                    t--;
+                }else {
+                    login.disabled="";
+                    clearInterval(i);
+                    login.value="查                  询";
+                }
+            }
+            i=setInterval(run,1000);
+        }
+        function submit3() {
+            var t=3;
+            var i;
+            var login=document.getElementById("btnGo3");
+            login.disabled="disabled";
+            function run() {
+                if (t>0) {
+                    login.value=t+"秒后可操作";
+                    t--;
+                }else {
+                    login.disabled="";
+                    clearInterval(i);
+                    login.value="查           找";
+                }
+            }
+            i=setInterval(run,1000);
+        }
+
     </script>
     <style>
         body{
             padding: 15px;
+            font-size: 25px;
+            background: lightcyan;
+            text-align: center;
+
         }
         input{
-            font-size: 20px;
+            font-size: 25px;
         }
-        p{
+        body p{
             background: #fff8c1;
+        }
+        #file_list{
+            background-color: #ffc328;
+            text-align: center;
+        }
+        #file_list p{
+            font-size: x-large;
         }
     </style>
 </head>
-<body style="font-size: 20px;background: lightcyan">
-<img th:src="@{/static/favicon.ico}">
+<body>
+<img th:src="@{/static/img/11.png}">
 
 <h2>文件上传(100M以内)</h2>
 <form method="post" name="uploadfrom" th:action="@{/uploadhtml/files}" enctype="multipart/form-data" onsubmit="return sub1()">
     账号：<input type="text" name="username" placeholder="请输入上传用户名"><br>
     密码：<input type="password" name="password" placeholder="请输入上传密码"><br><br>
     <input type="file" name="file" >
-    <input type="submit" value="提       交">
+    <br><br>
+    <input id="btnGo1" type="submit" value="提               交" style="width: 350px ">
 </form>
 <p>[[${msg}]]<a target="_blank" th:href="@{'/downloads/show/'+${name}}" th:if="${msg}=='上传成功！'"><label>[[${name}]]</label></a></p>
+<hr>
 
 <h2>文件查看/下载</h2>
-<form id="form1" method="get" th:action="@{/downloads/download}"th:target="${err1==null?'_blank':''}">
-    <input type="text" name="name"placeholder="请输入文件全称" >
-    <input type="submit" value="查          找">
+<form id="form1" name="downform" onsubmit="return sub3()" method="get" th:action="@{/downloads/download}"th:target="${err1==null?'_blank':''}">
+    <input type="text" name="name" placeholder="请输入文件全称" >
+    <input id="btnGo3" type="submit" value="查           找" >
 </form>
 <p th:if="${err1}!=null">[[${err1}]]</p>
+<hr>
 
+<h2>分类检索文件</h2>
+<form method="post" name="listfrom" th:action="@{/filelist/htmllist}" enctype="multipart/form-data" onsubmit="return sub2()">
+    账号：<input type="text" name="username" placeholder="请输入查询用户名"><br>
+    密码：<input type="password" name="password" placeholder="请输入查询密码"><br><br>
+    <input type="radio" name="type" value="all" checked="checked">全部文件
+    <input type="radio" name="type" value="image">图片文件
+    <input type="radio" name="type" value="video">视频文件<br>
+    <input type="radio" name="type" value="audio">音频文件
+    <input type="radio" name="type" value="text">文本文件
+    <input type="radio" name="type" value="application">应用文件<br>
+    <input type="radio" name="type" value="other">其他文件
+    <br>
+    <br>
+    <input id="btnGo2" type="submit" value="查               询" style="width: 350px ">
+</form>
+<hr>
+<div id="file_list" th:if="${list}!=null">
+    <h2>文件目录</h2>
+    <p th:each="s:${list}" ><a target="_blank" th:href="@{/downloads/show/}+${s}" th:text="${s}"></a></p>
+</div>
 </body>
 </html>

@@ -1,13 +1,17 @@
 
 <configuration>
     <!-- 控制台输出log信息 -->
-    <appender name="LOGOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="File" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <withJansi>true</withJansi>
         <encoder>
-            <pattern>%red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger) - %cyan(%msg%n)</pattern>
+            <pattern>%green(%d{yyyy-MM-dd HH:mm:ss}) [%thread] %cyan(%-5level) %blue(%logger) - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="Console" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
             <fileNamePattern>log日志/%d{yyyy-MM-dd}_%i.log</fileNamePattern>
@@ -22,7 +26,7 @@
         </encoder>
     </appender>
     <root level="INFO">
-        <appender-ref ref="INFO" />
-        <appender-ref ref="LOGOUT" />
+        <appender-ref ref="File" />
+        <appender-ref ref="Console" />
     </root>
 </configuration>
