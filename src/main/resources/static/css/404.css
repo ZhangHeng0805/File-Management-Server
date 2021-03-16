@@ -1,6 +1,5 @@
 body{
-    height: auto;
-    padding-top: 5%;
+    /*padding-top: 1%;*/
     text-align: center;
     color: white;
     background-color: black;
@@ -12,7 +11,7 @@ h1{
     font-size: 65px;
     color: white;
 }
-h2{
+#back{
     font-size: 55px;
-    color: white;
+    color: #ffd7cf;
 }

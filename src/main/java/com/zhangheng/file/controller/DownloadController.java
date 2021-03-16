@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,8 @@ import java.util.Map;
 public class DownloadController {
     private static String baseDir = "files/";
     Logger log = LoggerFactory.getLogger(getClass());
+    @Autowired
+    MyExceptionHandler myExceptionHandler;
 
     @GetMapping("download")
     public void download(String name, HttpServletResponse response, Map<String,String> model, HttpServletRequest request) throws IOException {
@@ -41,10 +44,13 @@ public class DownloadController {
 //            e.printStackTrace();
             log.error("错误："+e.getMessage());
             if (e.getMessage().indexOf("does not exist")>1) {
+//                request.setAttribute("javax.servlet.error.status_code",404);
                 response.sendError(404);
             }else {
+//                request.setAttribute("javax.servlet.error.status_code",500);
                 response.sendError(500);
             }
+
             model.put("err1","错误："+e.getMessage());
         }
     }
@@ -52,7 +58,7 @@ public class DownloadController {
     @GetMapping("show/{time}/{name:.+}")
     public Result show(@PathVariable("name") String name,
                        @PathVariable("time") String time, HttpServletRequest request,
-                       HttpServletResponse response) {
+                       HttpServletResponse response) throws IOException {
         Result result=new Result();
         String user_agent = CusAccessObjectUtil.getUser_Agent(request);
         String ipAddress = CusAccessObjectUtil.getIpAddress(request);
@@ -72,12 +78,14 @@ public class DownloadController {
         } catch (IOException e) {
             if (e.toString().indexOf("does not exist")>1){
                 result.setTitle("错误:404");
+                response.sendError(404);
             }else {
                 result.setTitle("错误");
             }
             log.error("错误："+e.getMessage());
             result.setMessage(e.getMessage());
 //            e.printStackTrace();
+
         }
         return result;
     }

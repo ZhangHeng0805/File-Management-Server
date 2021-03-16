@@ -144,7 +144,7 @@
 <hr>
 
 <h2>文件查看/下载</h2>
-<form id="form1" name="downform" onsubmit="return sub3()" method="get" th:action="@{/downloads/download}"th:target="${err1==null?'_blank':''}">
+<form id="form1" name="downform" onsubmit="return sub3()" method="get" th:action="@{/downloads/download}"th:target="${err1==null?'_self':''}">
     <input type="text" name="name" placeholder="请输入文件全称" >
     <input id="btnGo3" type="submit" value="查           找" >
 </form>

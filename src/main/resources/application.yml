@@ -5,6 +5,8 @@ server:
       charset: UTF-8
   tomcat:
     max-http-form-post-size: 100MB
+  error:
+    include-exception: true
 
 spring:
   servlet:
@@ -14,6 +16,7 @@ spring:
   output:
     ansi:
       enabled: always
+
   mvc:
     static-path-pattern: /static/**
   thymeleaf:
