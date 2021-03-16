@@ -37,17 +37,24 @@ public class UploadHtmlController {
         if (username!=null&&password!=null){
             if (username.equals(user.getUsername())&&password.equals(user.getPassword())){//设置上传的用户名和密码
                 if (!file.isEmpty()) {
-                    String fileType = FiletypeUtil.getFileType(file.getOriginalFilename());
+                    String filename=file.getOriginalFilename();
+                    String fileType = FiletypeUtil.getFileType(filename);
                     log.info("文件名：{}", file.getOriginalFilename());
                     log.info("文件类型：{}", fileType);
                     log.info("大小：{}字节", file.getSize());
 //                    String name= /*UUID.randomUUID().toString()*/
 //                            new SimpleDateFormat("yyyy-MM-dd/HH-mm-ss_SSS").format(new Date())
 //                                    + "@" + file.getOriginalFilename();
+                        filename = filename
+                                .replace(" ", "")
+                                .replace("星曦向荣网", "")
+                                .replace("星曦向荣", "")
+                                ;
+
                     String name=fileType+"/"
                             +"星曦向荣网"
                             + UUID.randomUUID().toString().substring(0,5)
-                            + "_" + file.getOriginalFilename();
+                            + "_" + filename;
                     File outFile = new File(baseDir + name);
 
                     try {

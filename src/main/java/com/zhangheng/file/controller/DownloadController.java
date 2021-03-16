@@ -33,6 +33,7 @@ public class DownloadController {
 //        String n=name.substring(20);
         File file = new File(baseDir + name);
         try {
+            response.setHeader("Content-Length", String.valueOf(file.length()));
             IOUtils.copy(FileUtils.openInputStream(file), response.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,6 +55,7 @@ public class DownloadController {
         log.info("下载文件："+file.getPath());
         FileInputStream input = null;
         try {
+            response.setHeader("Content-Length", String.valueOf(file.length()));
             input = FileUtils.openInputStream(file);
             IOUtils.copy(input, response.getOutputStream());
             result.setTitle("请求成功");
