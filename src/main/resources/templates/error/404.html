@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>404-没有找到</title>
+</head>
+<link type="text/css" rel="stylesheet" th:href="@{/static/css/404.css}"/>
+<body>
+<h1>对不起，没有找到你需要的</h1>
+<h3 th:text="${err1}" th:if="${err1!=null}"></h3>
+<img th:src="@{/static/img/404.jpg}">
+<a th:href="@{/}"><h2 id="back">点我返回主页</h2></a>
+</body>
+</html>

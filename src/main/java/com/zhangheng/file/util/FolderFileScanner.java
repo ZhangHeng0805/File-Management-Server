@@ -22,7 +22,7 @@ public class FolderFileScanner {
         ArrayList<String> dirctorys = new ArrayList<String>();
         File directory = new File(folderPath);
         if(!directory.isDirectory()){
-            throw new Exception('"' + folderPath + '"' + " input path is not a Directory , please input the right path of the Directory. ^_^...^_^");
+            throw new Exception('"' + folderPath + '"' + "(路径错误或没有此文件夹) input path is not a Directory , please input the right path of the Directory. ^_^...^_^");
         }
         if(directory.isDirectory()){
             File [] filelist = directory.listFiles();
@@ -53,7 +53,7 @@ public class FolderFileScanner {
     public static ArrayList<Object> scanFilesWithNoRecursion(String folderPath) throws Exception{
         File directory = new File(folderPath);
         if(!directory.isDirectory()){
-            throw new Exception('"' + folderPath + '"' + " input path is not a Directory , please input the right path of the Directory. ^_^...^_^");
+            throw new Exception('"' + folderPath + '"' + "(路径错误或没有此文件夹) input path is not a Directory , please input the right path of the Directory. ^_^...^_^");
         }
         else{
 //首先将第一层目录扫描一遍

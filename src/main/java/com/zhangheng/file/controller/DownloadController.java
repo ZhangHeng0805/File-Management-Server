@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 
 @RequestMapping("downloads")
@@ -27,17 +28,24 @@ public class DownloadController {
     Logger log = LoggerFactory.getLogger(getClass());
 
     @GetMapping("download")
-    public void download(String name, HttpServletResponse response, Model model)  {
+    public void download(String name, HttpServletResponse response, Map<String,String> model, HttpServletRequest request) throws IOException {
+        log.info("下载请求头："+CusAccessObjectUtil.getUser_Agent(request));
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-//        response.setContentType("text/html,charset=UTF-8");
-//        String n=name.substring(20);
         File file = new File(baseDir + name);
         try {
             response.setHeader("Content-Length", String.valueOf(file.length()));
             IOUtils.copy(FileUtils.openInputStream(file), response.getOutputStream());
+            log.info("下载IP："+CusAccessObjectUtil.getIpAddress(request));
+            log.info("下载请求成功(download)");
         } catch (IOException e) {
-            e.printStackTrace();
-            model.addAttribute("err1","错误："+e.getMessage());
+//            e.printStackTrace();
+            log.error("错误："+e.getMessage());
+            if (e.getMessage().indexOf("does not exist")>1) {
+                response.sendError(404);
+            }else {
+                response.sendError(500);
+            }
+            model.put("err1","错误："+e.getMessage());
         }
     }
 
@@ -60,14 +68,16 @@ public class DownloadController {
             IOUtils.copy(input, response.getOutputStream());
             result.setTitle("请求成功");
             result.setMessage(file.getName());
+            log.info("下载请求成功(show)");
         } catch (IOException e) {
             if (e.toString().indexOf("does not exist")>1){
                 result.setTitle("错误:404");
             }else {
                 result.setTitle("错误");
             }
+            log.error("错误："+e.getMessage());
             result.setMessage(e.getMessage());
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return result;
     }
