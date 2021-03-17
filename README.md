@@ -29,7 +29,6 @@
 > + 日志保存的路径：log日志/文件服务器日志.log
 > ### 账户设置
 > + application.properties(全局配置文件)
-
 > ```properties
 > # 账户设置
 > user.username = zhangheng
@@ -41,7 +40,6 @@
 > s3.secretKey = minioadmin
 > ```
 > 可以在jar包外部创建一个新的application.properties(全局配置文件)修改其中的数据，并和jar包放在同一个文件夹内；在启动运行时，外部的application.properties(全局配置文件)会覆盖掉jar内部的配置文件，从而实现修改账户的目的
-
 > #### 文件上传
 > * HTML访问文件上传的访问地址：localhost:8081/
 >   * 上传参数（post）
@@ -57,23 +55,33 @@
 >       + file文件
 >   + 返回格式Json对象
 > #### 文件下载
-> + 文件展示及下载地址：localhost:8081/downloads/show/文件的全路径
+> + 文件展示及下载地址(Get)：`localhost:8081/downloads/show/文件的全路径`
 >    + 这种直接在地址后面拼接即可
 >    + 示例：`http://localhost:8081/downloads/show/image/星曦向荣网c4462@错误码.png`
 > + 另一个下载方式：`http://localhost:8081/downloads/download`（这种方式下载时的文件名陈是download，有点bug）
 >      + 参数（get）：
 >           + name :输入文件的全路径，例：image/星曦向荣网c4462@错误码.png
 > ##### 文件遍历(将上传文件夹的files遍历)
-> + 以json数据返回， 访问路径：·localhost:8081/filelist/jsonlist/{type}·
->      * `@PathVariable("type") String type,
-          @Nullable @RequestParam("username") String username,
-          @Nullable @RequestParam("password") String password`
->           + 路径参数type有：all/image/audio/text/video/application/other这几种，不同参数对应遍历files文件夹里的不同文件夹
->           + username：账户名称
->           + password：账户密码
->      
-
-
+> + 以json数据返回(Post) 访问路径：`localhost:8081/filelist/jsonlist/{type}`
+>      * 参数：
+`
+            @PathVariable("type") String type,
+            @Nullable @RequestParam("username") String username,
+            @Nullable @RequestParam("password") String password
+`
+>         + 路径参数type有：`all/image/audio/text/video/application/other`这几种，不同参数对应遍历files文件夹里的不同文件夹
+>         + username：账户名称
+>         + password：账户密码
+> + 以Model形式返回给前端页面(Post) 访问路径：`localhost:8081/filelist/htmllist`
+>   + 参数：
+`
+            @Nullable @RequestParam("type") String type,
+            @Nullable @RequestParam("username") String username,
+            @Nullable @RequestParam("password") String password,        
+`
+>       + type:`all/image/audio/text/video/application/other`这几种，不同参数对应遍历files文件夹里的不同文件夹
+>       + username：账户名称
+>       + password：账户密码
 
 ### 日志的[logback-spring.xml文件](https://www.cnblogs.com/sxdcgaq8080/p/7885340.html)
 ```xml
