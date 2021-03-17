@@ -27,18 +27,19 @@
 > + 端口：8081
 > + 上传文件保存的文件夹：files
 > + 日志保存的路径：log日志/文件服务器日志.log
-### 账户设置
-+ application.properties(全局配置文件)
-```properties
-# 账户设置
-user.username = zhangheng
-user.password = 123456
+> ### 账户设置
+> + application.properties(全局配置文件)
 
-# Minio的连接配置
-s3.s3Url = http://192.168.194.205:9000
-s3.accessKey = minioadmin
-s3.secretKey = minioadmin
-```
+> ```properties
+> # 账户设置
+> user.username = zhangheng
+> user.password = 123456
+> 
+> # Minio的连接配置
+> s3.s3Url = http://192.168.194.205:9000
+> s3.accessKey = minioadmin
+> s3.secretKey = minioadmin
+> ```
 > 可以在jar包外部创建一个新的application.properties(全局配置文件)修改其中的数据，并和jar包放在同一个文件夹内；在启动运行时，外部的application.properties(全局配置文件)会覆盖掉jar内部的配置文件，从而实现修改账户的目的
 
 > #### 文件上传
@@ -62,7 +63,11 @@ s3.secretKey = minioadmin
 > + 另一个下载方式：`http://localhost:8081/downloads/download`（这种方式下载时的文件名陈是download，有点bug）
 >      + 参数（get）：
 >           + name :输入文件的全路径，例：image/星曦向荣网c4462@错误码.png
-
+> ##### 文件遍历(将上传文件夹的files遍历)
+> + 以json数据返回， 访问路径：·localhost:8081/filelist/jsonlist/{type}·
+>       + 路径参数type有：all/image/audio/text/video/application/other这几种，不同参数对应遍历files文件夹里的不同文件夹
+>       + username：账户名称
+>       + password：账户密码
 ### 日志的[logback-spring.xml文件](https://www.cnblogs.com/sxdcgaq8080/p/7885340.html)
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
