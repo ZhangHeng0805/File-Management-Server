@@ -45,12 +45,11 @@ public class DownloadController {
             log.error("错误："+e.getMessage());
             if (e.getMessage().indexOf("does not exist")>1) {
 //                request.setAttribute("javax.servlet.error.status_code",404);
-                response.sendError(404);
+                response.sendError(404,e.getMessage());
             }else {
 //                request.setAttribute("javax.servlet.error.status_code",500);
-                response.sendError(500);
+                response.sendError(500,e.toString());
             }
-
             model.put("err1","错误："+e.getMessage());
         }
     }

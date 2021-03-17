@@ -24,7 +24,6 @@ spring:
   banner:
     location: classpath:banner.txt
 
-
 logging:
   config: classpath:logging.xml
 #  file:
