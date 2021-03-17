@@ -65,9 +65,16 @@
 >           + name :输入文件的全路径，例：image/星曦向荣网c4462@错误码.png
 > ##### 文件遍历(将上传文件夹的files遍历)
 > + 以json数据返回， 访问路径：·localhost:8081/filelist/jsonlist/{type}·
->       + 路径参数type有：all/image/audio/text/video/application/other这几种，不同参数对应遍历files文件夹里的不同文件夹
->       + username：账户名称
->       + password：账户密码
+>      * `@PathVariable("type") String type,
+          @Nullable @RequestParam("username") String username,
+          @Nullable @RequestParam("password") String password`
+>           + 路径参数type有：all/image/audio/text/video/application/other这几种，不同参数对应遍历files文件夹里的不同文件夹
+>           + username：账户名称
+>           + password：账户密码
+>      
+
+
+
 ### 日志的[logback-spring.xml文件](https://www.cnblogs.com/sxdcgaq8080/p/7885340.html)
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
