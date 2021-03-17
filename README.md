@@ -1,5 +1,5 @@
 # [原项目参考](https://github.com/guangee/demo_upload)
-
+## [项目下载]
 1. 原生上传
 2. Minio上传
 3. s3上传
@@ -14,7 +14,6 @@
 3. 学习使用S3的[Java SDK](https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/ObjectOperations.html)上传
 > MinIO 是一个基于Apache License v2.0开源协议的对象存储服务。它兼容亚马逊S3云存储服务接口，非常适合于存储大容量非结构化的数据，例如图片、视频、日志文件、备份数据和容器/虚拟机镜像等，而一个对象文件可以是任意大小，从几kb到最大5T不等。
 > MinIO是一个非常轻量的服务,可以很简单的和其他应用的结合，类似 NodeJS, Redis 或者 MySQL。
-
 ```
 //docker安装minio
  docker pull minio/minio
@@ -25,8 +24,15 @@
 ```
 ## 配置说明
 > + 端口：8081
-> + 上传文件保存的文件夹：files
-> + 日志保存的路径：log日志/文件服务器日志.log
+> + 上传文件保存的文件夹（根目录）：files/
+>   + 根据文件类型的不同，会分为不同的文件夹进行保存
+>       + /image/：图像文件夹
+>       + /audio/：音频文件夹
+>       + /video/：视频文件夹
+>       + /text/：文本文件夹
+>       + /application/：应用文件夹
+>       + /other/：其他类型文件夹
+> + 日志保存的路径：log日志/
 > ### 账户设置
 > + application.properties(全局配置文件)
 > ```properties
@@ -61,7 +67,7 @@
 > + 另一个下载方式：`http://localhost:8081/downloads/download`（这种方式下载时的文件名陈是download，有点bug）
 >      + 参数（get）：
 >           + name :输入文件的全路径，例：image/星曦向荣网c4462@错误码.png
-> ##### 文件遍历(将上传文件夹的files遍历)
+> #### 文件遍历(将上传文件夹files的进行遍历)
 > + 以json数据返回(Post) 访问路径：`localhost:8081/filelist/jsonlist/{type}`
 >      * 参数：
 `
@@ -83,7 +89,7 @@
 >       + username：账户名称
 >       + password：账户密码
 
-### 日志的[logback-spring.xml文件](https://www.cnblogs.com/sxdcgaq8080/p/7885340.html)
+### 日志的[logback-spring.xml文件](https://www.cnblogs.com/sxdcgaq8080/p/7885340.html)(日志配置)
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
