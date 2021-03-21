@@ -73,7 +73,7 @@
 `
             @PathVariable("type") String type,
             @Nullable @RequestParam("username") String username,
-            @Nullable @RequestParam("password") String password
+            @Nullable @RequestParam("password") String password,
 `
 >         + 路径参数type有：`all/image/audio/text/video/application/other`这几种，不同参数对应遍历files文件夹里的不同文件夹
 >         + username：账户名称
@@ -88,7 +88,6 @@
 >       + type:`all/image/audio/text/video/application/other`这几种，不同参数对应遍历files文件夹里的不同文件夹
 >       + username：账户名称
 >       + password：账户密码
-
 ### 日志的[logback-spring.xml文件](https://www.cnblogs.com/sxdcgaq8080/p/7885340.html)(日志配置)
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

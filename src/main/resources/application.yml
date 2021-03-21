@@ -16,6 +16,19 @@ spring:
   output:
     ansi:
       enabled: always
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/jpa?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    #      控制台显示SQL
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
 
   mvc:
     static-path-pattern: /static/**
@@ -28,4 +41,5 @@ logging:
   config: classpath:logging.xml
 #  file:
 #    name: log日志/文件服务器日志.log
+
 
