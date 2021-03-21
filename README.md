@@ -1,5 +1,6 @@
 # [原项目参考](https://github.com/guangee/demo_upload)
 ## [文件管理系统成品下载](https://github.com/ZhangHeng0805/File-Management-Server/releases/download/V1.0/default.zip)
+## [文件管理和位置分享的jar包下载](https://github.com/ZhangHeng0805/File-Management-Server/releases/download/V1.2/upload_locationr.jar)
 1. 原生上传
 2. Minio上传
 3. s3上传
