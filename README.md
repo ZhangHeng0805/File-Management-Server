@@ -1,5 +1,5 @@
 # [原项目参考](https://github.com/guangee/demo_upload)
-## [项目下载]
+## [完整项目成品下载](https://github.com/ZhangHeng0805/File-Management-Server/releases/download/V1.0/default.zip)
 1. 原生上传
 2. Minio上传
 3. s3上传
