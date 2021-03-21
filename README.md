@@ -7,6 +7,7 @@
 * 增加一个前端HTML页面
 * 上传功能新增用户验证
 * 上传结果返回形式分为HTML页面格式和JSON格式（可以用作Android应用的数据返回格式）
+* 新增定位信息共享管理
 
 ## 文件上传下载
 1. SpringBoot原生文件上传下载，图片在线浏览
@@ -88,6 +89,49 @@
 >       + type:`all/image/audio/text/video/application/other`这几种，不同参数对应遍历files文件夹里的不同文件夹
 >       + username：账户名称
 >       + password：账户密码
+
+### 定位共享的数据库
+```sql
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : 张恒
+Source Server Version : 50535
+Source Host           : localhost:3306
+Source Database       : jpa
+
+Target Server Type    : MYSQL
+Target Server Version : 50535
+File Encoding         : 65001
+
+Date: 2021-03-21 20:18:54
+*/
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for location
+-- ----------------------------
+DROP TABLE IF EXISTS `location`;
+CREATE TABLE `location` (
+  `username` varchar(100) NOT NULL,
+  `latitude` varchar(255) DEFAULT NULL,
+  `longitude` varchar(255) DEFAULT NULL,
+  `time` varchar(100) DEFAULT NULL,
+  `state` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+```
 ### 日志的[logback-spring.xml文件](https://www.cnblogs.com/sxdcgaq8080/p/7885340.html)(日志配置)
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
