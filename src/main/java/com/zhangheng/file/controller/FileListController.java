@@ -160,4 +160,71 @@ public class FileListController {
         model.addAttribute("list",list);
         return "forward:/";
     }
+
+
+    @GetMapping("updatelist/{type}")
+    @ResponseBody
+    public Result updatelist(@Nullable @PathVariable("type") String type){
+        Result result=new Result();
+        ArrayList<String> list = new ArrayList<>();
+        list.clear();
+        if (type.length()>0){
+                try {
+                    files.clear();
+                    switch (type){
+                        case "MyOkHttp":
+                            files = FolderFileScanner.scanFilesWithRecursion("update\\MyOkHttp");
+                            break;
+                            default:
+                                files.add("null");
+                    }
+                    if (!files.isEmpty()) {
+                        for (Object o : files) {
+                            String s1 = "";
+                            String s = String.valueOf(o);
+                            if (s.indexOf("update") > 1) {
+                                s1 = s.substring(s.indexOf("update"));
+                            } else {
+                                s1 = s;
+                            }
+                            s1=s1.replace("\\","/");
+                            list.add(s1);
+                        }
+                        if (list.size()>1){
+                            result.setTitle(type);
+                            result.setMessage(list.get(list.size()-1));
+                        }else {
+                            if (list.get(0)=="null"){
+                                result.setTitle("null");
+                                result.setMessage("没有找到对应的更新");
+                            }else {
+                                result.setTitle(type);
+                                result.setMessage(list.get(0));
+                            }
+                        }
+                    }else {
+                        result.setTitle("null");
+                        result.setMessage("files为空");
+                    }
+                    log.info("title:"+result.getTitle());
+                    log.info("message:"+result.getMessage());
+
+                } catch (Exception e) {
+                    if (e.getMessage().indexOf("路径错误或没有此文件夹")>1){
+                        result.setTitle("null");
+                        result.setMessage(e.getMessage());
+                    }else {
+                        result.setTitle("错误");
+                        result.setMessage(e.getMessage());
+                    }
+//                    e.printStackTrace();
+                    log.error("update错误："+e.getMessage());
+                }
+        }else {
+            result.setTitle("内容为空");
+            result.setMessage("请求内容不能为空");
+        }
+        return result;
+
+    }
 }

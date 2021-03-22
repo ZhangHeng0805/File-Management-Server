@@ -7,11 +7,9 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,8 +82,38 @@ public class DownloadController {
             log.error("错误："+e.getMessage());
             result.setMessage(e.getMessage());
 //            e.printStackTrace();
-
         }
+        return result;
+    }
+    @ResponseBody
+    @GetMapping("downupdate/update/{type}/{name}")
+    public Result downupdate(@Nullable @PathVariable("type") String type,@Nullable @PathVariable("name") String name,HttpServletResponse response){
+        Result result=new Result();
+        if (type.length()>0){
+            File file = new File("update/"+type+"/"+name);
+            log.info("更新下载："+file.getPath());
+            FileInputStream input = null;
+            try {
+                response.setHeader("Content-Length", String.valueOf(file.length()));
+                input = FileUtils.openInputStream(file);
+                IOUtils.copy(input, response.getOutputStream());
+                result.setTitle("请求成功");
+                result.setMessage(file.getName());
+                log.info("更新请求成功");
+            } catch (IOException e) {
+                if (e.getMessage().indexOf("does not exist")>1){
+                    result.setTitle("错误:404（没找到）");
+                }else {
+                    result.setTitle("错误");
+                }
+                log.error("错误："+e.getMessage());
+                result.setMessage(e.getMessage());
+            }
+        }else {
+            result.setTitle("内容为空");
+            result.setMessage("请求内容不能为空");
+        }
+
         return result;
     }
 }
