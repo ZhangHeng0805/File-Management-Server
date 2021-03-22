@@ -206,8 +206,8 @@ public class FileListController {
                         result.setTitle("null");
                         result.setMessage("files为空");
                     }
-                    log.info("title:"+result.getTitle());
-                    log.info("message:"+result.getMessage());
+                    log.info("更新查询title:"+result.getTitle());
+                    log.info("更新查询message:"+result.getMessage());
 
                 } catch (Exception e) {
                     if (e.getMessage().indexOf("路径错误或没有此文件夹")>1){

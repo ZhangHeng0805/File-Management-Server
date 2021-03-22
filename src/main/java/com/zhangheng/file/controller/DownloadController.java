@@ -99,7 +99,7 @@ public class DownloadController {
                 IOUtils.copy(input, response.getOutputStream());
                 result.setTitle("请求成功");
                 result.setMessage(file.getName());
-                log.info("更新请求成功");
+                log.info("更新下载请求成功");
             } catch (IOException e) {
                 if (e.getMessage().indexOf("does not exist")>1){
                     result.setTitle("错误:404（没找到）");
