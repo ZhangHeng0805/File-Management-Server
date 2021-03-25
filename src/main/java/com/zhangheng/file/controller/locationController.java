@@ -6,6 +6,7 @@ import com.zhangheng.file.entity.User;
 import com.zhangheng.file.repository.LocationRepository;
 import com.zhangheng.file.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +16,12 @@ import java.util.List;
 
 @RestController
 public class locationController {
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    LocationRepository locationRepository;
+        @Autowired
+                @Qualifier(value = "userRepository")
+        UserRepository userRepository;
+        @Autowired
+        @Qualifier(value = "locationRepository")
+        LocationRepository locationRepository;
 
     @PostMapping("zhuce")
     public Resuilt zhuce(User user){

@@ -1,12 +1,15 @@
 package com.zhangheng.file.controller;
 
+import com.zhangheng.file.entity.PhoneMessage;
 import com.zhangheng.file.entity.Result;
 import com.zhangheng.file.entity.User;
+import com.zhangheng.file.repository.PhoneMessageRepository;
 import com.zhangheng.file.util.FolderFileScanner;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +27,12 @@ public class FileListController {
 
     Logger log=LoggerFactory.getLogger(getClass());
     @Autowired
+    @Qualifier(value = "user")
     private User user;
+    @Autowired
+    private PhoneMessageRepository phoneMessageRepository;
     ArrayList<Object> files = new ArrayList<>();
+
 
 
     @ResponseBody
@@ -162,13 +169,19 @@ public class FileListController {
     }
 
 
-    @GetMapping("updatelist/{type}")
+    @PostMapping("updatelist/{type}")
     @ResponseBody
-    public Result updatelist(@Nullable @PathVariable("type") String type){
+    public Result updatelist(@Nullable @PathVariable("type") String type, PhoneMessage phoneMessage){
         Result result=new Result();
         ArrayList<String> list = new ArrayList<>();
         list.clear();
         if (type.length()>0){
+            if (phoneMessage!=null){
+                PhoneMessage phoneMessage1 = phoneMessageRepository.saveAndFlush(phoneMessage);
+                log.info("用户登录："+phoneMessage1);
+            }else {
+                log.info("phoneMessage为空");
+            }
                 try {
                     files.clear();
                     switch (type){

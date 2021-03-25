@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,7 +86,9 @@ public class DownloadController {
     }
     @ResponseBody
     @GetMapping("downupdate/update/{type}/{name}")
-    public Result downupdate(@Nullable @PathVariable("type") String type,@Nullable @PathVariable("name") String name,HttpServletResponse response){
+    public Result downupdate(@Nullable @PathVariable("type") String type,
+                             @Nullable @PathVariable("name") String name,
+                             HttpServletResponse response){
         Result result=new Result();
         if (type.length()>0){
             File file = new File("update/"+type+"/"+name);

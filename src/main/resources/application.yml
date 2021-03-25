@@ -27,8 +27,8 @@ spring:
       ddl-auto: update
     #      控制台显示SQL
     show-sql: false
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
   mvc:
     static-path-pattern: /static/**

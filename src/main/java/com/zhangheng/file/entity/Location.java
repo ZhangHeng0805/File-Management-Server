@@ -1,10 +1,14 @@
 package com.zhangheng.file.entity;
 
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Component
 @Entity
 @Table
 public class Location {
