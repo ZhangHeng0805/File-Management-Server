@@ -35,6 +35,7 @@
 >       + /application/：应用文件夹
 >       + /other/：其他类型文件夹
 > + 日志保存的路径：log日志/
+> + 软件更新的路径：update/软件名/软件安装包
 > ### 账户设置
 > + application.properties(全局配置文件)
 > ```properties
