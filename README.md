@@ -106,7 +106,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50535
 File Encoding         : 65001
 
-Date: 2021-03-22 22:47:49
+Date: 2021-03-26 21:59:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -122,6 +122,19 @@ CREATE TABLE `location` (
   `time` varchar(100) DEFAULT NULL,
   `state` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for phone_message
+-- ----------------------------
+DROP TABLE IF EXISTS `phone_message`;
+CREATE TABLE `phone_message` (
+  `phonenum` varchar(100) NOT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `sdk` varchar(255) DEFAULT NULL,
+  `release` varchar(255) DEFAULT NULL,
+  `time` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`phonenum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
