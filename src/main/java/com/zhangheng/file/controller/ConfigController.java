@@ -32,6 +32,7 @@ public class ConfigController {
         }else {
             log.error("chatconfig错误：查询为空");
         }
+        log.info("聊天室配置："+chatConfig);
         return chatConfig;
     }
 }

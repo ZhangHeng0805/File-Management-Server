@@ -219,7 +219,7 @@ public class FileListController {
                         result.setTitle("null");
                         result.setMessage("files为空");
                     }
-                    log.info("更新查询title:"+result.getTitle());
+//                    log.info("更新查询title:"+result.getTitle());
                     log.info("更新查询message:"+result.getMessage());
 
                 } catch (Exception e) {
