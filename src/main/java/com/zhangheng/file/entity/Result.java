@@ -24,4 +24,12 @@ public class Result {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "title='" + title + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

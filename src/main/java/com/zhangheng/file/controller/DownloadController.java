@@ -101,7 +101,7 @@ public class DownloadController {
                 result.setTitle("请求成功");
                 result.setMessage(file.getName());
                 log.info("更新下载请求成功");
-            } catch (IOException e) {
+            } catch (Exception e) {
                 if (e.getMessage().indexOf("does not exist")>1){
                     result.setTitle("错误:404（没找到）");
                 }else {
