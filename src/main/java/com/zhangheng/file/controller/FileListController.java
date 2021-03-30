@@ -178,7 +178,7 @@ public class FileListController {
         if (type.length()>0){
             if (phoneMessage!=null){
                 PhoneMessage phoneMessage1 = phoneMessageRepository.saveAndFlush(phoneMessage);
-                log.info("用户登录："+phoneMessage1);
+                log.info("用户手机："+phoneMessage1);
             }else {
                 log.info("phoneMessage为空");
             }
@@ -220,7 +220,7 @@ public class FileListController {
                         result.setMessage("files为空");
                     }
 //                    log.info("更新查询title:"+result.getTitle());
-                    log.info("更新查询message:"+result.getMessage());
+                    log.info("应用更新查询:"+result.getMessage());
 
                 } catch (Exception e) {
                     if (e.getMessage().indexOf("路径错误或没有此文件夹")>1){

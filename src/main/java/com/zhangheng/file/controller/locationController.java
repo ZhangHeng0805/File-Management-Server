@@ -5,6 +5,8 @@ import com.zhangheng.file.entity.Resuilt;
 import com.zhangheng.file.entity.User;
 import com.zhangheng.file.repository.LocationRepository;
 import com.zhangheng.file.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ public class locationController {
         @Autowired
         @Qualifier(value = "locationRepository")
         LocationRepository locationRepository;
+    Logger log = LoggerFactory.getLogger(getClass());
 
     @PostMapping("zhuce")
     public Resuilt zhuce(User user){
@@ -32,13 +35,16 @@ public class locationController {
                 User save = userRepository.save(user);
                 resuilt.setTitle("注册成功");
                 resuilt.setMessage(user.getUsername()+"：恭喜注册成功");
+                log.info(user.getUsername()+"：注册成功");
             }else {
                 resuilt.setTitle("数据重复");
                 resuilt.setMessage("该账号已经存在");
+                log.info("注册账号重复");
             }
         }else {
             resuilt.setTitle("数据为空");
             resuilt.setMessage("账号密码不能为空");
+            log.info("注册的账号密码不能为空");
         }
         return resuilt;
     }
@@ -64,12 +70,14 @@ public class locationController {
             resuilt.setTitle("数据为空");
             resuilt.setMessage("账号密码不能为空");
         }
+        log.info("登录："+resuilt);
         return resuilt;
     }
 
     @PostMapping("location")
     public List<Location> location(Location location){
         if (location!=null) {
+            log.info("位置共享："+location);
             Location save = locationRepository.saveAndFlush(location);
             List<Location> locations = new ArrayList<>();
             locations = locationRepository.findAll();
