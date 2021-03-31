@@ -9,6 +9,7 @@
 * 上传功能新增用户验证
 * 上传结果返回形式分为HTML页面格式和JSON格式（可以用作Android应用的数据返回格式）
 * 新增定位信息共享管理
+* 新增利用Netty创建的聊天室[项目链接](https://github.com/ZhangHeng0805/Netty)
 
 ## 文件上传下载
 1. SpringBoot原生文件上传下载，图片在线浏览
