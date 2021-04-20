@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>500-服务器异常</title>
 </head>
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/500.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/img/css/500.css}">
 <body>
 <h1>
     [[${#dates.format(timestamp,'yyyy/MM/dd HH:mm')}]]
     <br>
-    [[${status}]]，服务器暂时出错
+    <img th:src="@{/static/images/500-error.png}" style="height: 50px">，服务器暂时出错
 </h1>
 <h3 th:if="${messages!=null}">[[${message}]]</h3>
 <img th:src="@{/static/img/500.png}">

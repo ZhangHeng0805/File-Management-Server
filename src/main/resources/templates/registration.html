@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>商户注册</title>
+
+    <link th:href="@{/static/css/style.css}" rel="stylesheet">
+    <link th:href="@{static/css/style-responsive.css}" rel="stylesheet">
+    <script src="/static/img/js/registration.js" type="text/javascript"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="login-body">
+
+<div class="container">
+
+    <form class="form-signin" method="post" th:action="@{/registration_html}" enctype="multipart/form-data" name="Form" onsubmit="return isb()">
+        <div class="form-signin-heading text-center">
+            <h1 class="sign-title">商户注册</h1>
+            <img th:src="@{/static/images/login-logo.png}" alt=""/>
+        </div>
+        <div class="login-wrap">
+            <p th:if="${msg}!=null" th:style="${code}==200?'color:green':'color:red'"th:text="${msg}"></p>
+            <p>请在下面输入您的个人详细信息</p>
+            <input type="text" name="name" autofocus="" placeholder="本人姓名" class="form-control">
+            <div class="radios">
+                <label for="radio-01" class="label_radio col-lg-6 col-sm-6">
+                    <input type="radio" name="gender" checked="" value="男" id="radio-01" > 男性
+                </label>
+                <label for="radio-02" class="label_radio col-lg-6 col-sm-6">
+                    <input type="radio" name="gender" value="女" id="radio-02" > 女性
+                </label>
+            </div>
+            <input type="text" autofocus="" name="email" placeholder="Email邮箱" class="form-control">
+            <input type="text" autofocus=""name="phonenum" placeholder="电话号码" class="form-control">
+            <hr>
+            <p> 请在下面输入您的账户的信息</p>
+            <input type="text" autofocus=""name="account" placeholder="用户名" class="form-control">
+            <input type="password" placeholder="密码" name="password1" class="form-control">
+            <input type="password" placeholder="重新输入密码"name="password" class="form-control">
+            <hr>
+            <p> 请在下面输入您的创建的店铺信息</p>
+            <input type="text" autofocus="" name="store_name" placeholder="店铺名称" class="form-control">
+            <input type="text" name="address" placeholder="所在地区" class="form-control">
+
+            <label for="exampleInputFile2" class="line">商铺图片：</label>
+            <label class="label-warning" style="font-size: small;display: inline-block">请选择商铺的图片(大小1Mb以内)</label>
+            <input type="file" id="exampleInputFile2" name="store_image" class="form-group">
+            <input type="hidden" name="time">
+            <textarea class="form-control"name="store_introduce" rows="3"id="inputEmail" placeholder="店铺的介绍"></textarea>
+            <button type="submit" name="submit" class="btn btn-lg btn-login btn-block">
+                <i class="fa fa-check"></i>
+            </button>
+
+            <div class="registration">
+                已经注册了。
+                <a href="Login" class="">
+                    去登录
+                </a>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/modernizr.min.js}"></script>
+<script src="/static/img/js/registration.js" type="text/javascript"></script>
+
+</body>
+</html>

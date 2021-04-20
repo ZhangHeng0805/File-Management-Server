@@ -1,5 +1,6 @@
 package com.zhangheng.file.config;
 
+import com.zhangheng.file.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -17,7 +18,9 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
+        registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns("/main.html","/responsive_table","/goodsfromstore_table");
+//                .excludePathPatterns("/","/Login","/registration","/error/**","/static/**");
     }
 
     @Override

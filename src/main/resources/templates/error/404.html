@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>404-没有找到</title>
 </head>
-<link type="text/css" rel="stylesheet" th:href="@{/static/css/404.css}"/>
+<link type="text/css" rel="stylesheet" th:href="@{/static/img/css/404.css}"/>
 <body>
 
 <h1>
     [[${#dates.format(timestamp,'yyyy/MM/dd HH:mm')}]]
     <br>
-    《[[${status}]]》，没有找到你需要的
+    <img th:src="@{/static/images/404-error.png}" style="height: 50px">，没有找到你需要的
 </h1>
 <h3 th:if="${message}!=null">[[${message}]]</h3>
 <img th:src="@{/static/img/404.jpg}">

@@ -58,11 +58,11 @@ public class DownloadController {
         Result result=new Result();
         String user_agent = CusAccessObjectUtil.getUser_Agent(request);
         String ipAddress = CusAccessObjectUtil.getIpAddress(request);
-        log.info("下载请求头："+user_agent);
-        log.info("下载IP："+ipAddress);
+//        log.info("下载请求头："+user_agent);
+//        log.info("下载IP："+ipAddress);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         File file = new File(baseDir + time+"/"+name);
-        log.info("下载文件："+file.getPath());
+//        log.info("下载文件："+file.getPath());
         FileInputStream input = null;
         try {
             response.setHeader("Content-Length", String.valueOf(file.length()));
@@ -70,8 +70,8 @@ public class DownloadController {
             IOUtils.copy(input, response.getOutputStream());
             result.setTitle("请求成功");
             result.setMessage(file.getName());
-            log.info("下载请求成功(show)");
-        } catch (IOException e) {
+//            log.info("下载请求成功(show)");
+        } catch (Exception e) {
             if (e.toString().indexOf("does not exist")>1){
                 result.setTitle("错误:404");
                 response.sendError(404);

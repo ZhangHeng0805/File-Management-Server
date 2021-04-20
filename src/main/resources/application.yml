@@ -5,6 +5,7 @@ server:
       charset: UTF-8
   tomcat:
     max-http-form-post-size: 100MB
+    connection-timeout: 180000
   error:
     include-exception: true
 

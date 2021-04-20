@@ -20,12 +20,12 @@ import java.util.ArrayList;
 * 遍历上传的文件
 *
 * */
-@Slf4j
+
 @RequestMapping("filelist")
 @Controller
 public class FileListController {
 
-    Logger log=LoggerFactory.getLogger(getClass());
+    private Logger log=LoggerFactory.getLogger(getClass());
     @Autowired
     @Qualifier(value = "user")
     private User user;
@@ -165,7 +165,7 @@ public class FileListController {
             list.add("请输入账号和密码");
         }
         model.addAttribute("list",list);
-        return "forward:/";
+        return "forward:/file";
     }
 
 
