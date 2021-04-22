@@ -81,6 +81,71 @@ public class CustomerController {
         }
         return customer;
     }
+
+    @PostMapping("updateUsername")
+    public Result updateUsername(@Nullable User user){
+        Result result = new Result();
+        if (user!=null) {
+            boolean b = customerRepository.existsById(user.getUsername());
+            if (b) {
+                customerRepository.updateUserNameByPhone(user.getPassword(),user.getUsername());
+                result.setTitle("修改成功");
+                result.setMessage(user.getPassword());
+            }else {
+
+                result.setTitle("用户不存在");
+                result.setMessage("对不起没有此账户的信息");
+            }
+        }else {
+
+            result.setTitle("参数为空");
+            result.setMessage("服务器没有收到请求参数");
+        }
+        log.info(result.toString());
+        return result;
+    }
+    @PostMapping("updateIcon")
+    public Result updateIcon(@Nullable User user){
+        Result result = new Result();
+        if (user!=null) {
+            boolean b = customerRepository.existsById(user.getUsername());
+            if (b) {
+                customerRepository.updateIconByPhone(user.getPassword(),user.getUsername());
+                result.setTitle("修改成功");
+                result.setMessage(user.getPassword());
+            }else {
+                result.setTitle("用户不存在");
+                result.setMessage("对不起没有此账户的信息");
+            }
+        }else {
+
+            result.setTitle("参数为空");
+            result.setMessage("服务器没有收到请求参数");
+        }
+        log.info(result.toString());
+        return result;
+    }
+    @PostMapping("updatePassWord")
+    public Result updatePassWord(@Nullable User user){
+        Result result = new Result();
+        if (user!=null) {
+            boolean b = customerRepository.existsById(user.getUsername());
+            if (b) {
+                customerRepository.updatePassWordByPhone(user.getPassword(),user.getUsername());
+                result.setTitle("修改成功");
+                result.setMessage(user.getPassword());
+            }else {
+                result.setTitle("用户不存在");
+                result.setMessage("对不起没有此账户的信息");
+            }
+        }else {
+
+            result.setTitle("参数为空");
+            result.setMessage("服务器没有收到请求参数");
+        }
+        log.info(result.toString());
+        return result;
+    }
     @PostMapping("setAddress")
     public Result setAddress(@Nullable @RequestParam("address") String address,
                              @Nullable @RequestParam("phone") String phone){

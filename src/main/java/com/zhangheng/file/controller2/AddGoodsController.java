@@ -45,7 +45,7 @@ public class AddGoodsController {
                             String name =
                                             "商品图"
                                             + UUID.randomUUID().toString().substring(0, 8)
-                                            + "_" + goods.getGoods_name();
+                                            + "_" + goods.getGoods_name()+filename.substring(filename.lastIndexOf("."));
                             File outFile = new File(baseDir + name);
                             try {
                                 FileUtils.copyToFile(image.getInputStream(), outFile);
