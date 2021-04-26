@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("config")
 @RestController
@@ -20,17 +22,13 @@ public class ConfigController {
     private ChatConfigRepository chatConfigRepository;
 
     @GetMapping("chatconfig")
-    public ChatConfig chatConfig(){
+    public ChatConfig chatConfig(@RequestParam("port")String port){
         ChatConfig chatConfig = new ChatConfig();
-        List<ChatConfig> all = chatConfigRepository.findAll();
-        if (all.size()>0){
-            if (all.size()!=1){
-                chatConfig=all.get(all.size()-1);
-            }else {
-                chatConfig=all.get(0);
-            }
+        Optional<ChatConfig> byId = chatConfigRepository.findById(port);
+        if (byId.isPresent()){
+            chatConfig=byId.get();
         }else {
-            log.error("chatconfig错误：查询为空");
+            log.error("chatconfig错误："+port+"查询为空");
         }
         log.info("聊天室配置："+chatConfig);
         return chatConfig;

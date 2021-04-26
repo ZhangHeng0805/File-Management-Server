@@ -52,7 +52,7 @@ public class RegisteredController {
                                 String name =
                                         "商铺图"
                                         + UUID.randomUUID().toString().substring(0, 8)
-                                        + "_" + merchants.getStore_name();
+                                        + "_" + merchants.getStore_name()+filename.substring(filename.lastIndexOf("."));
                                 File outFile = new File(baseDir + name);
                                 try {
                                     FileUtils.copyToFile(store_image.getInputStream(), outFile);

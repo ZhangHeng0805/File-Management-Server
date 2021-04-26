@@ -9287,8 +9287,9 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
-		
+			// "sInfo": "从 _START_ 到 _END_ of _TOTAL_ entries",
+			"sInfo": "总计 _TOTAL_ 条数据，当前显示 _START_ 到 _END_",
+
 		
 			/**
 			 * Display information string for when the table is empty. Typically the 

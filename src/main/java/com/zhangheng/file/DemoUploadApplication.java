@@ -15,7 +15,9 @@ public class DemoUploadApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoUploadApplication.class, args);
         ChatServer server=new ChatServer(8888);
-        server.run();
+        com.zhangheng.file.chat.ShopChat.ChatServer server1=new com.zhangheng.file.chat.ShopChat.ChatServer(8889);
+//        server.run();
+        server1.run();
     }
 
 }

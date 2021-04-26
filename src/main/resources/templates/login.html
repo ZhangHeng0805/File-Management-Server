@@ -44,13 +44,13 @@
 
     <form class="form-signin" action="index.html" method="post" name="Form1" th:action="@{/Login}" onsubmit="return sub()">
         <div class="form-signin-heading text-center">
-            <h1 class="sign-title">请登录</h1>
-            <img src="images/login-logo.png" th:src="@{/static/images/login-logo.png}" alt=""/>
+            <h1 class="sign-title">商家管理系统</h1>
+            <img src="/static/images/login-logo.png" th:src="@{/static/images/login-logo.png}" alt=""/>
         </div>
         <div class="login-wrap">
             <label style="color: red" th:text="${msg}" th:if="${msg}!=null"></label>
-            <input type="text" name="username" class="form-control" placeholder="电话号码" autofocus>
-            <input type="password" name="password" class="form-control" placeholder="密码">
+            <input type="text" name="username" class="form-control" placeholder="请输入手机号码" autofocus>
+            <input type="password" name="password" class="form-control" placeholder="请输入密码">
 
             <button class="btn btn-lg btn-login btn-block" type="submit">
                 <i class="fa fa-check"></i>

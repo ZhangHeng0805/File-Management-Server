@@ -89,7 +89,7 @@ public class CustomerController {
             boolean b = customerRepository.existsById(user.getUsername());
             if (b) {
                 customerRepository.updateUserNameByPhone(user.getPassword(),user.getUsername());
-                result.setTitle("修改成功");
+                result.setTitle("用户名修改成功");
                 result.setMessage(user.getPassword());
             }else {
 
@@ -111,7 +111,7 @@ public class CustomerController {
             boolean b = customerRepository.existsById(user.getUsername());
             if (b) {
                 customerRepository.updateIconByPhone(user.getPassword(),user.getUsername());
-                result.setTitle("修改成功");
+                result.setTitle("头像修改成功");
                 result.setMessage(user.getPassword());
             }else {
                 result.setTitle("用户不存在");
@@ -132,7 +132,7 @@ public class CustomerController {
             boolean b = customerRepository.existsById(user.getUsername());
             if (b) {
                 customerRepository.updatePassWordByPhone(user.getPassword(),user.getUsername());
-                result.setTitle("修改成功");
+                result.setTitle("密码修改成功");
                 result.setMessage(user.getPassword());
             }else {
                 result.setTitle("用户不存在");

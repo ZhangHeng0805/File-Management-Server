@@ -1,17 +1,24 @@
 package com.zhangheng.file.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "chatconfig")
 public class ChatConfig {
-    @Id
+    @Id //这是一个主键
+    private String id;
+    @Column
     private String ip;
     @Column(name = "[port]")
     private String port;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getIp() {
         return ip;
@@ -32,7 +39,8 @@ public class ChatConfig {
     @Override
     public String toString() {
         return "ChatConfig{" +
-                "ip='" + ip + '\'' +
+                "id='" + id + '\'' +
+                ", ip='" + ip + '\'' +
                 ", port='" + port + '\'' +
                 '}';
     }
