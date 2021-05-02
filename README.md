@@ -51,7 +51,7 @@
 > ```
 > 可以在jar包外部创建一个新的application.properties(全局配置文件)修改其中的数据，并和jar包放在同一个文件夹内；在启动运行时，外部的application.properties(全局配置文件)会覆盖掉jar内部的配置文件，从而实现修改账户的目的
 > #### 文件上传
-> * HTML访问文件上传的访问地址：localhost:8081/
+> * HTML访问文件上传的访问地址：localhost:8081/files
 >   * 上传参数（post）
 >       + username
 >       + password
