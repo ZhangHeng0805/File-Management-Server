@@ -93,7 +93,7 @@
 >       + username：账户名称
 >       + password：账户密码
 
-### 定位共享的数据库
+### 本项目的数据库jpa的建表SQL语句
 ```sql
 /*
 Navicat MySQL Data Transfer
@@ -107,10 +107,77 @@ Target Server Type    : MYSQL
 Target Server Version : 50535
 File Encoding         : 65001
 
-Date: 2021-03-26 21:59:16
+Date: 2021-05-03 20:41:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for chatconfig
+-- ----------------------------
+DROP TABLE IF EXISTS `chatconfig`;
+CREATE TABLE `chatconfig` (
+  `id` varchar(11) NOT NULL,
+  `ip` varchar(100) DEFAULT NULL,
+  `port` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for customer
+-- ----------------------------
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE `customer` (
+  `phone` varchar(11) NOT NULL,
+  `username` varchar(20) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `sex` varchar(5) DEFAULT NULL,
+  `icon` varchar(100) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`phone`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for goods
+-- ----------------------------
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods` (
+  `goods_id` int(11) NOT NULL AUTO_INCREMENT,
+  `goods_name` varchar(255) DEFAULT NULL,
+  `goods_image` varchar(255) DEFAULT NULL,
+  `goods_type` varchar(255) DEFAULT NULL,
+  `goods_introduction` varchar(255) DEFAULT NULL,
+  `goods_month_much` int(11) unsigned zerofill DEFAULT NULL,
+  `goods_price` double(10,2) DEFAULT NULL,
+  `store_name` varchar(255) DEFAULT NULL,
+  `store_id` varchar(255) DEFAULT NULL,
+  `time` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`goods_id`),
+  KEY `goods_name` (`goods_name`(191))
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for goods_list
+-- ----------------------------
+DROP TABLE IF EXISTS `goods_list`;
+CREATE TABLE `goods_list` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `goods_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `goods_name` varchar(255) DEFAULT NULL,
+  `goods_price` double(10,2) DEFAULT NULL,
+  `num` int(11) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `list_id` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `list_id` (`list_id`),
+  KEY `goods_id` (`goods_id`),
+  KEY `store_id` (`store_id`),
+  CONSTRAINT `goods_list_ibfk_1` FOREIGN KEY (`list_id`) REFERENCES `submit_goodslist` (`submit_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `goods_list_ibfk_2` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `goods_list_ibfk_3` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for location
@@ -126,6 +193,29 @@ CREATE TABLE `location` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
+-- Table structure for merchants
+-- ----------------------------
+DROP TABLE IF EXISTS `merchants`;
+CREATE TABLE `merchants` (
+  `phonenum` varchar(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `account` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `store_name` varchar(255) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `store_introduce` varchar(255) DEFAULT NULL,
+  `time` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`phonenum`),
+  KEY `name` (`name`(191),`store_name`(191),`store_introduce`(191),`time`),
+  KEY `store_name` (`store_name`(191)),
+  KEY `store_id` (`store_id`),
+  CONSTRAINT `merchants_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
 -- Table structure for phone_message
 -- ----------------------------
 DROP TABLE IF EXISTS `phone_message`;
@@ -136,6 +226,38 @@ CREATE TABLE `phone_message` (
   `release` varchar(255) DEFAULT NULL,
   `time` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`phonenum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for stores
+-- ----------------------------
+DROP TABLE IF EXISTS `stores`;
+CREATE TABLE `stores` (
+  `store_id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_name` varchar(255) DEFAULT NULL,
+  `store_image` varchar(255) DEFAULT NULL,
+  `boss_name` varchar(255) DEFAULT NULL,
+  `start_time` varchar(100) DEFAULT NULL,
+  `store_introduce` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`store_id`),
+  KEY `store_name` (`store_name`(191)) USING BTREE,
+  CONSTRAINT `stores_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `merchants` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for submit_goodslist
+-- ----------------------------
+DROP TABLE IF EXISTS `submit_goodslist`;
+CREATE TABLE `submit_goodslist` (
+  `submit_id` varchar(50) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(11) DEFAULT NULL,
+  `count_price` double(20,2) DEFAULT NULL,
+  `time` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`submit_id`),
+  KEY `phone` (`phone`),
+  CONSTRAINT `submit_goodslist_ibfk_1` FOREIGN KEY (`phone`) REFERENCES `customer` (`phone`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
@@ -157,7 +279,7 @@ CREATE TABLE `users` (
   `email` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 ```
 ### 日志的[logback-spring.xml文件](https://www.cnblogs.com/sxdcgaq8080/p/7885340.html)(日志配置)
