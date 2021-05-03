@@ -1,17 +1,21 @@
 package com.zhangheng.file.controller;
 
+import com.zhangheng.file.bean.Goods;
+import com.zhangheng.file.bean.GoodsOrder;
 import com.zhangheng.file.bean.Merchants;
 import com.zhangheng.file.bean.Store;
+import com.zhangheng.file.bean.submitgoods.SubmitGoods;
+import com.zhangheng.file.bean.submitgoods.goods;
 import com.zhangheng.file.entity.User;
-import com.zhangheng.file.repository.MerchantsRepository;
-import com.zhangheng.file.repository.StoreRepository;
-import com.zhangheng.file.repository.UserRepository;
+import com.zhangheng.file.repository.*;
+import com.zhangheng.file.util.DigitalFormatUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +38,12 @@ public class LoginController {
     MerchantsRepository merchantsRepository;
     @Autowired
     private StoreRepository storeRepository;
+    @Autowired
+    private SubmitGoodsRepository submitGoodsRepository;
+    @Autowired
+    private GoodsRepository goodsRepository;
+    @Autowired
+    private ListGoodsRepository listGoodsRepository;
 
     //登录页面
     @GetMapping(value = {"/","/Login"})
@@ -71,18 +82,54 @@ public class LoginController {
     }
     //去main页面
     @GetMapping("main.html")
-    public String mainPage(Model model){
-        //判断是否登录，拦截器，过滤器
-//        Object loginUser = session.getAttribute("loginUser");
-//        if (loginUser!=null){
-//            return "index";
-//        }else {
-//            model.addAttribute("msg","请重新登录");
-//            return "login";
-//        }
+    public String mainPage(HttpServletRequest request,Model model){
+        HttpSession session =request.getSession();
+        Store store = (Store) session.getAttribute("store");
+        List<Goods> goodsList = goodsRepository.findByStore_id(store.getStore_id());
+        List<goods> byStore_id = listGoodsRepository.findByStore_idAndState(store.getStore_id(),"未处理");
+        List<GoodsOrder> submitGoodsList=new ArrayList<>();
+        int goodsnum=0;
+        double goodsprice=0;
+        for (goods g:byStore_id) {
+            GoodsOrder goodsOrder = new GoodsOrder();
+            String list_id = g.getList_id();
+            SubmitGoods submitId = submitGoodsRepository.findBySubmit_id(list_id);
+            goodsOrder.setSubmit_id(submitId.getSubmit_id());
+            goodsOrder.setName(submitId.getName());
+            goodsOrder.setPhone(submitId.getPhone());
+            goodsOrder.setAddress(submitId.getAddress());
+            goodsOrder.setTime(submitId.getTime());
+            goodsOrder.setGoods_name(g.getGoods_name());
+            goodsOrder.setGoods_id(g.getGoods_id());
+            goodsOrder.setGoods_price(g.getGoods_price());
+            goodsOrder.setNum(g.getNum());
+            submitGoodsList.add(goodsOrder);
+            goodsnum+=g.getNum();
+            goodsprice+=g.getGoods_price()*g.getNum();
+        }
+        int num = 0;
+        double count_price = 0;
+        for (Goods g:goodsList){
+            num+=g.getGoods_month_much();
+            count_price+=g.getGoods_price()*g.getGoods_month_much();
+        }
+        count_price= DigitalFormatUtil.formatDouble2(count_price);
+        goodsprice= DigitalFormatUtil.formatDouble2(goodsprice);
+//        log.info("店铺："+store.getStore_name()+";总销量："+num+";总营业额："+count_price);
+//        log.info("订单数量:"+submitGoodsList.size());
+        model.addAttribute("num",num);
+        model.addAttribute("goodsnum",goodsnum);
+        model.addAttribute("listnum",submitGoodsList.size());
+        model.addAttribute("count_price",count_price);
+        model.addAttribute("goodsprice",goodsprice);
+        model.addAttribute("Store_name",store.getStore_name());
+        model.addAttribute("Store_introduce",store.getStore_introduce());
+        model.addAttribute("count_price",count_price);
+        model.addAttribute("submitGoodsList",submitGoodsList);
         model.addAttribute("active","main");
         return "main";
     }
+
     @RequestMapping("/registration")
     public String registrationPage(){
 //        log.info("跳转到注册");

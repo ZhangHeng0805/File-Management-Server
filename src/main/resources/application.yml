@@ -17,11 +17,11 @@ spring:
   output:
     ansi:
       enabled: always
-  datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/jpa?serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    username: root
+#    password: root
+#    url: jdbc:mysql://localhost:3306/jpa?serverTimezone=UTC
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:

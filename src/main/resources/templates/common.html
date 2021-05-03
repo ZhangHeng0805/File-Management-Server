@@ -50,7 +50,8 @@
         <!--左菜单-->
         <ul class="nav nav-pills nav-stacked custom-nav">
 
-            <li th:class="${active}=='main'?'active':''"class=""><a href="main.html"><i class="fa fa-home"></i> <span>主页介绍</span></a></li>
+            <li th:class="${active}=='main'?'active':''"class=""><a href="main.html"><i class="fa fa-home"></i> <span>主页详情</span></a></li>
+            <li th:class="${active}=='1'?'active':''"class=""><a th:href="@{/basic_table}"><i class="fa fa-bar-chart-o"></i> <span>订单列表</span></a></li>
 
             <li th:class="${active}=='3'?'active':''"><a th:href="@{/responsive_table}"><i class="fa fa-bullhorn"></i> <span>添加商品</span></a></li>
 <!--
@@ -64,7 +65,7 @@
                     <!--<li ><a th:href="@{/responsive_table}"> Responsive Table</a></li>-->
             <li th:class="${active}=='4'?'active':''"><a th:href="@{'/goodsfromstore_table?id='+${session.store.store_id}
             +'&store_name='+${session.store.store_name}
-            +'&name='+${session.loginUser.name}}"><i class="fa fa-th-list"></i>  <span>商铺信息</span></a></li>
+            +'&name='+${session.loginUser.name}}"><i class="fa fa-th-list"></i>  <span>商品信息</span></a></li>
 
 <!--                </ul>
             </li>-->

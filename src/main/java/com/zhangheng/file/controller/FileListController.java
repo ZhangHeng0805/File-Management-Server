@@ -171,12 +171,12 @@ public class FileListController {
 
     @PostMapping("updatelist/{type}")
     @ResponseBody
-    public Result updatelist(@Nullable @PathVariable("type") String type, PhoneMessage phoneMessage){
+    public Result updatelist(@Nullable @PathVariable("type") String type,@Nullable PhoneMessage phoneMessage){
         Result result=new Result();
         ArrayList<String> list = new ArrayList<>();
         list.clear();
         if (type.length()>0){
-            if (phoneMessage!=null){
+            if (phoneMessage.getPhonenum()!=null){
                 PhoneMessage phoneMessage1 = phoneMessageRepository.saveAndFlush(phoneMessage);
                 log.info("用户手机："+phoneMessage1);
             }else {
@@ -188,8 +188,12 @@ public class FileListController {
                         case "MyOkHttp":
                             files = FolderFileScanner.scanFilesWithRecursion("update\\MyOkHttp");
                             break;
+                        case "乐在购物":
+                            files = FolderFileScanner.scanFilesWithRecursion("update\\乐在购物");
+                            break;
                             default:
                                 files.add("null");
+                                break;
                     }
                     if (!files.isEmpty()) {
                         for (Object o : files) {
@@ -211,13 +215,14 @@ public class FileListController {
                                 result.setTitle("null");
                                 result.setMessage("没有找到对应的更新");
                             }else {
-                                result.setTitle(type);
+                                String substring = list.get(0).substring(list.get(0).lastIndexOf("/") + 1, list.get(0).indexOf("_"));
+                                result.setTitle(substring);
                                 result.setMessage(list.get(0));
                             }
                         }
                     }else {
                         result.setTitle("null");
-                        result.setMessage("files为空");
+                        result.setMessage("更新文件为空");
                     }
 //                    log.info("更新查询title:"+result.getTitle());
                     log.info("应用更新查询:"+result.getMessage());

@@ -9266,7 +9266,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "暂无数据",
 		
 		
 			/**
@@ -9307,7 +9307,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "总计 0 条数据，当前显示 0 到 0",
 		
 		
 			/**
@@ -9327,7 +9327,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
+			"sInfoFiltered": "(总共过滤 _MAX_ 条数据)",
 		
 		
 			/**
@@ -9482,7 +9482,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "查找:",
 		
 		
 			/**
@@ -9525,7 +9525,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "未能找到匹配的数据"
 		},
 	
 	

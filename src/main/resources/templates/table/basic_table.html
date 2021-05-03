@@ -7,7 +7,7 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>Basic Table</title>
+  <title>订单列表</title>
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
@@ -37,16 +37,13 @@
         <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                Basic Table
+                订单详情
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="#">Dashboard</a>
+                    <a href="#"th:text="${session.store.store_name}"></a>
                 </li>
-                <li>
-                    <a href="#">Data Table</a>
-                </li>
-                <li class="active"> Basic Table </li>
+                <li class="active" th:text="${session.store.store_introduce}"> </li>
             </ul>
         </div>
         <!-- page heading end-->
@@ -54,232 +51,52 @@
         <!--body wrapper start-->
         <div class="wrapper">
             <div class="row">
-            <div class="col-sm-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Basic Table
-                            <span class="tools pull-right">
-                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                <a href="javascript:;" class="fa fa-times"></a>
-                             </span>
-                    </header>
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </section>
-            </div>
-            <div class="col-sm-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Striped Table
-                            <span class="tools pull-right">
-                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                <a href="javascript:;" class="fa fa-times"></a>
-                             </span>
-                    </header>
-                    <div class="panel-body">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
-        </div>
-            <div class="row">
-            <div class="col-sm-6">
-                <section class="panel">
-                    <header class="panel-heading no-border">
-                        Border Table
-                            <span class="tools pull-right">
-                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                <a href="javascript:;" class="fa fa-times"></a>
-                             </span>
-                    </header>
-                    <div class="panel-body">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td rowspan="2">1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@TwBootstrap</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
-            <div class="col-sm-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Hover Table
-                            <span class="tools pull-right">
-                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                <a href="javascript:;" class="fa fa-times"></a>
-                             </span>
-                    </header>
-                    <div class="panel-body">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Jane Doe</td>
-                                <td>Mosa</td>
-                                <td>@twitter</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
-        </div>
-            <div class="row">
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            General Table
+                            本店所有订单
                         <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                             <a href="javascript:;" class="fa fa-times"></a>
                          </span>
                         </header>
                         <div class="panel-body">
-                            <table class="table  table-hover general-table">
+                            <table class="table  table-hover general-table" id="editable-sample">
                                 <thead>
                                 <tr>
-                                    <th> Company</th>
-                                    <th class="hidden-phone">Descrition</th>
-                                    <th>Profit</th>
-                                    <th>Status</th>
-                                    <th>Progress</th>
+                                    <th>订单号</th>
+                                    <th class="hidden-phone">收货人</th>
+                                    <th>地址</th>
+                                    <th>电话</th>
+                                    <th>商品名</th>
+                                    <th>商品id</th>
+                                    <th>单价</th>
+                                    <th>数量</th>
+                                    <th>总价</th>
+                                    <th>状态</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <tr>
-                                    <td>
-                                        <a href="#">
-                                            ThemeBucket
-                                        </a>
-                                    </td>
-                                    <td class="hidden-phone">Lorem Ipsum dorolo</td>
-                                    <td>556.00$ </td>
-                                    <td><span class="label label-warning label-mini">Due</span></td>
-                                    <td>
-                                        <div class="progress progress-striped progress-xs">
-                                            <div style="width: 70%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-danger">
-                                                <span class="sr-only">70% Complete (success)</span>
-                                            </div>
-                                        </div>
+                                <tr th:each="g:${submitGoodsAllList}">
+                                    <td th:text="${g.submit_id}">订单号</td>
+                                    <td class="hidden-phone" th:text="${g.name}">收货人</td>
+                                    <td th:text="${g.address}">地址</td>
+                                    <td th:text="${g.phone}">电话</td>
+                                    <td th:text="${g.goods_name}">商品名</td>
+                                    <td th:text="${g.goods_id}">商品id</td>
+                                    <td th:text="${g.goods_price}">单价</td>
+                                    <td th:text="${g.num}">数量</td>
+                                    <td th:text="${#numbers.formatDecimal(g.goods_price*g.num,1,'COMMA',2,'POINT')}">总价</td>
+                                    <td th:switch="${g.state}">
+                                        <span th:case="订单确认" class="label label-info label-mini" th:text="${g.state}">状态</span>
+                                        <span th:case="订单拒绝" class="label label-warning label-mini" th:text="${g.state}">状态</span>
+                                        <span th:case="未处理" class="label label-default label-mini" th:text="${g.state}">状态</span>
+                                        <span th:case="已收货" class="label label-success label-mini" th:text="${g.state}">状态</span>
+                                        <span th:case="退货" class="label label-danger label-mini" th:text="${g.state}">状态</span>
                                     </td>
                                 </tr>
-                                <tr>
+                               <!-- <tr>
                                     <td>
                                         <a href="#">
                                             XYZ
@@ -295,8 +112,8 @@
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
-                                <tr>
+                                </tr>-->
+                               <!-- <tr>
                                     <td><a href="#">Graphics</a></td>
                                     <td class="hidden-phone">Lorem Ipsum dorolo imit</td>
                                     <td>1320.00$ </td>
@@ -355,21 +172,22 @@
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr>-->
 
                                 </tbody>
                             </table>
                         </div>
                     </section>
                 </div>
+                <footer>
+                    2021 &copy; 星曦向荣 </a>
+                </footer>
             </div>
         </div>
         <!--body wrapper end-->
 
         <!--footer section start-->
-        <footer>
-            2020 &copy; AdminEx by ThemeBucket </a>
-        </footer>
+
         <!--footer section end-->
 
 
@@ -384,9 +202,16 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/modernizr.min.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
-
 &lt;!&ndash;common scripts for all pages&ndash;&gt;
 <script src="js/scripts.js"></script>-->
-
+<script type="text/javascript" src="/static/js/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/static/js/data-tables/DT_bootstrap.js"></script>
+<!--script for editable table-->
+<script src="/static/js/editable-table.js"></script>
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>
 </body>
 </html>

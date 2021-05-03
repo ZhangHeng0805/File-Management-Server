@@ -5,6 +5,7 @@ import com.zhangheng.file.bean.Goods;
 import com.zhangheng.file.bean.submitgoods.SubmitGoods;
 import com.zhangheng.file.bean.submitgoods.goods;
 import com.zhangheng.file.repository.GoodsRepository;
+import com.zhangheng.file.repository.SubmitGoodsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import java.util.*;
 public class GoodsContorller {
     @Autowired
     private GoodsRepository goodsRepository;
+    @Autowired
+    private SubmitGoodsRepository submitGoodsRepository;
     Logger log = LoggerFactory.getLogger(getClass());
 
     @PostMapping("allgoodslist")
@@ -50,14 +53,15 @@ public class GoodsContorller {
             List<Integer> id=new ArrayList<>();
             List<Integer> n=new ArrayList<>();
             for (goods g:goods_list){
-                id.add(g.getId());
+                id.add(g.getGoods_id());
                 n.add(g.getNum());
+                g.setState("未处理");
             }
             List<Goods> allById = goodsRepository.findAllById(id);
             double count = 0;
             for (Goods goods:allById) {
                 for (goods g:goods_list){
-                    if (g.getId().equals(goods.getGoods_id())){
+                    if (g.getGoods_id().equals(goods.getGoods_id())){
                         count+=goods.getGoods_price()*g.getNum();
                     }
                 }
@@ -66,10 +70,16 @@ public class GoodsContorller {
             count= bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
             log.info("总金额："+count);
             if (count==submitGoods.getCount_price()){
-                for (goods g:goods_list) {
-                    goodsRepository.addGood_month_much(g.getNum(),g.getId());
+//                for (goods g:goods_list) {
+//                    goodsRepository.addGood_month_much(g.getNum(),g.getGoods_id());
+//                }
+                SubmitGoods submitGoods1 = submitGoodsRepository.saveAndFlush(submitGoods);
+                if (submitGoods1!=null) {
+                    msg = "成功";
+                }else {
+                    msg = "失败";
                 }
-                msg="成功";
+
             }else {
                 msg="失败";
             }

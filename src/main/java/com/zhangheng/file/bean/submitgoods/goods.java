@@ -1,8 +1,30 @@
 package com.zhangheng.file.bean.submitgoods;
 
+import org.springframework.stereotype.Controller;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "goods_list")
 public class goods {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "[goods_id]")
+    private Integer goods_id;
+    @Column(name = "[store_id]")
+    private Integer store_id;
+    @Column(name = "[goods_name]")
+    private String goods_name;
+    @Column(name = "[goods_price]")
+    private Double goods_price;
+    @Column(name = "[num]")
     private Integer num;
+    @Column(name = "[state]")
+    private String state;
+    @Column(name = "list_id")
+    private String list_id;
 
     public Integer getId() {
         return id;
@@ -12,11 +34,72 @@ public class goods {
         this.id = id;
     }
 
+    public Integer getStore_id() {
+        return store_id;
+    }
+
+    public void setStore_id(Integer store_id) {
+        this.store_id = store_id;
+    }
+
+    public Integer getGoods_id() {
+        return goods_id;
+    }
+
+    public void setGoods_id(Integer goods_id) {
+        this.goods_id = goods_id;
+    }
+
+    public String getGoods_name() {
+        return goods_name;
+    }
+
+    public void setGoods_name(String goods_name) {
+        this.goods_name = goods_name;
+    }
+
+    public Double getGoods_price() {
+        return goods_price;
+    }
+
+    public void setGoods_price(Double goods_price) {
+        this.goods_price = goods_price;
+    }
+
     public Integer getNum() {
         return num;
     }
 
     public void setNum(Integer num) {
         this.num = num;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getList_id() {
+        return list_id;
+    }
+
+    public void setList_id(String list_id) {
+        this.list_id = list_id;
+    }
+
+    @Override
+    public String toString() {
+        return "goods{" +
+                "id=" + id +
+                ", goods_id=" + goods_id +
+                ", store_id=" + store_id +
+                ", goods_name='" + goods_name + '\'' +
+                ", goods_price=" + goods_price +
+                ", num=" + num +
+                ", list_id='" + list_id + '\'' +
+                '}';
     }
 }

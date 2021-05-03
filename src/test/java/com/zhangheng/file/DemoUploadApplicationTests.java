@@ -1,11 +1,15 @@
 package com.zhangheng.file;
 
 import com.zhangheng.file.bean.Goods;
+import com.zhangheng.file.bean.submitgoods.SubmitGoods;
+import com.zhangheng.file.bean.submitgoods.goods;
 import com.zhangheng.file.entity.PhoneMessage;
 import com.zhangheng.file.entity.S3Config;
 import com.zhangheng.file.entity.User;
 import com.zhangheng.file.repository.GoodsRepository;
+import com.zhangheng.file.repository.ListGoodsRepository;
 import com.zhangheng.file.repository.PhoneMessageRepository;
+import com.zhangheng.file.repository.SubmitGoodsRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -76,6 +80,40 @@ class DemoUploadApplicationTests {
         }
         System.out.println(goodsList.size());*/
 //        goodsRepository.addGood_month_much(2);
+    }
+    @Autowired
+    private SubmitGoodsRepository submitGoodsRepository;
+    private ListGoodsRepository listGoodsRepository;
+    @Test
+    public void test4(){
+/*        goods goods0 = new goods();
+        goods goods1 = new goods();
+
+        goods0.setGoods_id(1);
+        goods0.setGoods_name("1");
+        goods0.setGoods_price(1.0);
+        goods0.setNum(2);
+
+        goods1.setGoods_id(2);
+        goods1.setGoods_name("1");
+        goods1.setGoods_price(1.5);
+        goods1.setNum(2);
+
+
+        List<goods> list=new ArrayList<>();
+        list.add(goods0);
+        list.add(goods1);
+        SubmitGoods submitGoods = new SubmitGoods();
+        submitGoods.setAddress("武汉");
+        submitGoods.setCount_price(5.0);
+        submitGoods.setGoods_list(list);
+        submitGoods.setName("zh");
+        submitGoods.setPhone("120");
+        submitGoods.setSubmit_id("1.1.1");
+        List<SubmitGoods> all = submitGoodsRepository.findAll();
+        for (SubmitGoods s:all) {
+            System.out.println(s);
+        }*/
     }
 
 }

@@ -7,7 +7,7 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>商家商品</title>
+  <title>商品信息</title>
 
   <!--data table-->
   <![endif]-->
@@ -71,6 +71,7 @@
                     <th style="text-align: center">商品ID</th>
                     <th style="text-align: center">商品名称</th>
                     <th style="text-align: center">商品简介</th>
+                    <th style="text-align: center">商品种类</th>
                     <th style="text-align: center">商品价格</th>
                     <th style="text-align: center">总销量</th>
                     <th style="text-align: center">总收益</th>
@@ -84,6 +85,7 @@
                     <td style="text-align: center" th:text="${goods.goods_id}"></td>
                     <td style="text-align: center ;height: auto" th:text="${goods.goods_name}">商品名称</td>
                     <td style="text-align: center;height: auto;width: auto;margin: auto"  th:text="${goods.goods_introduction}">商品简介</td>
+                    <td style="text-align: center;height: auto;width: auto;margin: auto"  th:text="${goods.goods_type}">商品种类</td>
                     <td style="text-align: center" th:text="${goods.goods_price}">商品价格</td>
                     <td style="text-align: center" class="center" th:text="${goods.goods_month_much}">销量</td>
                     <td style="text-align: center" class="center" th:text="${#numbers.formatDecimal(goods.goods_month_much*goods.goods_price,1,'COMMA',2,'POINT')}"></td>
