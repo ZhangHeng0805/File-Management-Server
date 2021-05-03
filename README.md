@@ -44,7 +44,7 @@
 > user.username = zhangheng
 > user.password = 123456
 > 
-> # Minio的连接配置
+> # Minio的连接配置（此处可以不用配置）
 > s3config.s3Url = http://192.168.194.205:9000
 > s3config.accessKey = minioadmin
 > s3config.secretKey = minioadmin
