@@ -92,7 +92,14 @@
 >       + type:`all/image/audio/text/video/application/other`这几种，不同参数对应遍历files文件夹里的不同文件夹
 >       + username：账户名称
 >       + password：账户密码
-
+### 项目数据库连接配置
+```properties
+#数据库配置
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.url=jdbc:mysql://localhost:3306/jpa?serverTimezone=UTC
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+```
 ### 本项目的数据库jpa的建表SQL语句
 ```sql
 /*
