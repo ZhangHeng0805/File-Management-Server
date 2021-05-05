@@ -24,7 +24,7 @@ public class OrderController {
     @Autowired
     private GoodsRepository goodsRepository;
 
-    @PostMapping("Insert_Order")
+    @PostMapping("Insert_Order")//根据手机号查询订单
     @ResponseBody
     public List<SubmitGoods> submitGoodsList(@RequestParam("phone") String phone){
         List<SubmitGoods> list=new ArrayList<>();
@@ -34,7 +34,7 @@ public class OrderController {
         return list;
     }
 
-    @PostMapping("OK_Order")
+    @PostMapping("OK_Order")//订单商品确认收货
     @ResponseBody
     public Result submitOrderOK(
             @RequestParam("num") int num
@@ -58,7 +58,7 @@ public class OrderController {
         }
         return result;
     }
-    @PostMapping("NO_Order")
+    @PostMapping("NO_Order")//订单商品退货
     @ResponseBody
     public Result submitOrderNO(
             @RequestParam("submit_id") String submit_id

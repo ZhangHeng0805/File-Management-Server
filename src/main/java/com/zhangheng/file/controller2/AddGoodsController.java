@@ -22,7 +22,7 @@ public class AddGoodsController {
     @Autowired
     private GoodsRepository goodsRepository;
     Logger log = LoggerFactory.getLogger(getClass());
-    private static String baseDir = "files/goods/";;
+    private static String baseDir = "files/goods/";
 
     @PostMapping("responsive_table")
     public String responsive_table(MultipartFile image, Goods goods, Model model){

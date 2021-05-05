@@ -44,6 +44,7 @@
                 <section class="panel">
                 <header class="panel-heading">
                     本店商品
+                    <p class="btn-info" th:if="${msg}!=null" th:text="${msg}"></p>
                     <span class="tools pull-right">
                         <a href="javascript:;" class="fa fa-chevron-down"></a>
 <!--                        <a href="javascript:;" class="fa fa-times"></a>-->
@@ -56,6 +57,7 @@
                         <button class="btn btn-primary"><!--id="editable-sample_new"-->
                             <a th:href="@{/responsive_table}">添加数据 <i class="fa fa-plus"></i></a>
                         </button>
+
                     </div>
 
                 </div>
@@ -75,8 +77,8 @@
                     <th style="text-align: center">商品价格</th>
                     <th style="text-align: center">总销量</th>
                     <th style="text-align: center">总收益</th>
-                    <!--<th>编辑</th>
-                    <th>删除</th>-->
+                    <th>编辑商品</th>
+                    <th>删除商品</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -89,8 +91,10 @@
                     <td style="text-align: center" th:text="${goods.goods_price}">商品价格</td>
                     <td style="text-align: center" class="center" th:text="${goods.goods_month_much}">销量</td>
                     <td style="text-align: center" class="center" th:text="${#numbers.formatDecimal(goods.goods_month_much*goods.goods_price,1,'COMMA',2,'POINT')}"></td>
-                    <!--<td><a class="edit" href="javascript:;">编辑</a></td>
-                    <td><a class="delete" href="javascript:;">删除</a></td>-->
+                    <!--<td><a class="btn btn-sm btn-search e1" >编辑</a></td>
+                    <td><a class="btn btn-sm btn-danger d1" th:attr="del_url=@{/Goods/deleteGoods/}+${goods.store_id}+'/'+${goods.goods_id}">删除</a></td>-->
+                    <td><a class="btn btn-sm btn-search edit" th:attr="put=${goods.goods_id}">编辑</a></td>
+                    <td><a class="btn btn-sm btn-danger delete" th:attr="del=${goods.goods_id}">删除</a>
                 </tr>
 <!--                <tr class="">-->
 <!--                    <td>Mojela</td>-->
@@ -103,6 +107,14 @@
 
                 </tbody>
                 </table>
+                    <form id="putEmpRorm" th:method="${'post'}" th:action="@{updeteGoods}">
+                        <input type="hidden" name="goods_id" id="put_goods_id">
+                        <input type="hidden" name="store_id" th:value="${session.store.store_id}">
+                    </form>
+                    <form id="delEmpRorm" th:method="${'post'}" th:action="@{deleteGoods}">
+                        <input type="hidden" name="goods_id" id="del_goods_id">
+                        <input type="hidden"  name="store_id" th:value="${session.store.store_id}">
+                    </form>
                 </div>
                 </div>
                     <footer>
@@ -131,6 +143,38 @@
 <!--<script src="js/modernizr.min.js"></script>-->
 <!--<script src="js/jquery.nicescroll.js"></script>-->
 <div th:include="common::#com_script"></div>
+<script>
+    $(".d1").click(function () {
+        $("#delEmpRorm").attr("action",$(this).attr("del_url")).submit();
+        return false;
+    });
+    $(".e1").click(function () {
+        $("#putEmpRorm").attr("action",$(this).attr("put_url")).submit();
+        return false;
+    });
+    $(".delete").click(function () {
+        var a= window.confirm("确定要删除此商品？");
+        if (a) {
+            $("#del_goods_id").attr("value", $(this).attr("del"));
+            var goods_id = $("#del_goods_id").val();
+            if (goods_id.length > 0) {
+                $("#delEmpRorm").submit();
+            } else {
+                alert("<0")
+            }
+        }
+    });
+    $(".edit").click(function () {
+        $("#put_goods_id").attr("value",$(this).attr("put"));
+        var goods_id=$("#put_goods_id").val();
+        if (goods_id.length>0){
+            $("#putEmpRorm").submit();
+        } else {
+            alert("<0")
+        }
+    })
+</script>
+<script th:src="@{/static/img/js/jquery-3.2.1.slim.min.js}"></script>
 <!--data table-->
 <script type="text/javascript" src="/static/js/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="/static/js/data-tables/DT_bootstrap.js"></script>

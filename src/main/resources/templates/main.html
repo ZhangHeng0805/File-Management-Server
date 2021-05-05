@@ -41,7 +41,7 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="#" th:text="${Store_name}"></a>
+                    <a th:text="${Store_name}"></a>
                 </li>
                 <li class="active"th:text="${Store_introduce}"></li>
             </ul>
@@ -114,8 +114,8 @@
                                     <i class="fa fa-eye"></i>
                                 </div>
                                 <div class="state-value">
-                                    <div class="value">390</div>
-                                    <div class="title"> Unique Visitors</div>
+                                    <div class="value" th:text="${OKnum}"></div>
+                                    <div class="title"> 已成交的订单总数</div>
                                 </div>
                             </div>
                         </div>
@@ -215,8 +215,11 @@
 
 <script>
     $(".d1").click(function () {
-        $("#delEmpRorm").attr("action",$(this).attr("del_url")).submit();
-        return false;
+        var d=window.confirm("确定拒绝此订单商品？");
+        if (d) {
+            $("#delEmpRorm").attr("action", $(this).attr("del_url")).submit();
+            return false;
+        }
     });
     $(".e1").click(function () {
         $("#putEmpRorm").attr("action",$(this).attr("put_url")).submit();

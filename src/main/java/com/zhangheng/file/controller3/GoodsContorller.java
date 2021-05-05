@@ -2,6 +2,7 @@ package com.zhangheng.file.controller3;
 
 import com.google.gson.Gson;
 import com.zhangheng.file.bean.Goods;
+import com.zhangheng.file.bean.Store;
 import com.zhangheng.file.bean.submitgoods.SubmitGoods;
 import com.zhangheng.file.bean.submitgoods.goods;
 import com.zhangheng.file.repository.GoodsRepository;
@@ -10,16 +11,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.*;
 
 @RequestMapping("Goods")
-@RestController
+@Controller
 public class GoodsContorller {
     @Autowired
     private GoodsRepository goodsRepository;
@@ -27,7 +28,9 @@ public class GoodsContorller {
     private SubmitGoodsRepository submitGoodsRepository;
     Logger log = LoggerFactory.getLogger(getClass());
 
+
     @PostMapping("allgoodslist")
+    @ResponseBody
     public List<Goods> getAllList(@Nullable @RequestParam String GoodsType){
         List<Goods> goods = new ArrayList<>();
         log.info("查询商品类型："+GoodsType);
@@ -38,11 +41,10 @@ public class GoodsContorller {
                 goods = goodsRepository.findByGoods_type(GoodsType);
             }
         }
-//        List<Goods> goods = new ArrayList<>();
-
         return goods;
     }
     @PostMapping("submitgoodslist")
+    @ResponseBody
     public String submit(@RequestParam String submitGoodsList){
         String msg="";
         log.info(submitGoodsList);
@@ -86,4 +88,5 @@ public class GoodsContorller {
         }
         return msg;
     }
+
 }

@@ -87,6 +87,7 @@ public class LoginController {
         Store store = (Store) session.getAttribute("store");
         List<Goods> goodsList = goodsRepository.findByStore_id(store.getStore_id());
         List<goods> byStore_id = listGoodsRepository.findByStore_idAndState(store.getStore_id(),"未处理");
+        List<goods> OKGoodList = listGoodsRepository.findByStore_idAndState(store.getStore_id(),"已收货");
         List<GoodsOrder> submitGoodsList=new ArrayList<>();
         int goodsnum=0;
         double goodsprice=0;
@@ -118,6 +119,7 @@ public class LoginController {
 //        log.info("店铺："+store.getStore_name()+";总销量："+num+";总营业额："+count_price);
 //        log.info("订单数量:"+submitGoodsList.size());
         model.addAttribute("num",num);
+        model.addAttribute("OKnum",OKGoodList.size());
         model.addAttribute("goodsnum",goodsnum);
         model.addAttribute("listnum",submitGoodsList.size());
         model.addAttribute("count_price",count_price);

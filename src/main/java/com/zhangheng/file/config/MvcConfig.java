@@ -19,7 +19,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/main.html","/responsive_table","/goodsfromstore_table");
+                .addPathPatterns("/main.html","/responsive_table","/goodsfromstore_table","/dynamic_table","/basic_table");
 //                .excludePathPatterns("/","/Login","/registration","/error/**","/static/**");
     }
 

@@ -63,9 +63,7 @@
 <!--                    <li th:class="${active}=='1'?'active':''"><a th:href="@{/basic_table}">Base Table </a></li>-->
 <!--                    <li th:class="${active}=='2'?'active':''"><a th:href="@{/dynamic_table}"> Advanced Table</a></li>-->
                     <!--<li ><a th:href="@{/responsive_table}"> Responsive Table</a></li>-->
-            <li th:class="${active}=='4'?'active':''"><a th:href="@{'/goodsfromstore_table?id='+${session.store.store_id}
-            +'&store_name='+${session.store.store_name}
-            +'&name='+${session.loginUser.name}}"><i class="fa fa-th-list"></i>  <span>商品信息</span></a></li>
+            <li th:class="${active}=='4'?'active':''"><a th:href="@{/goodsfromstore_table}"><i class="fa fa-th-list"></i><span>商品信息</span></a></li>
 
 <!--                </ul>
             </li>-->

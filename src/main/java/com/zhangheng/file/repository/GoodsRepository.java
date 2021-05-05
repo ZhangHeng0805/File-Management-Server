@@ -31,4 +31,9 @@ public interface GoodsRepository extends JpaRepository<Goods, Integer> {
     //根据商品类型查询商品
     @Query("select u from Goods u where u.goods_type = ?1")
     List<Goods> findByGoods_type(String type);
+
+    @Modifying
+    @Query("delete from Goods sc where sc.store_id=?1 and sc.goods_id = ?2")
+    public void deleteByStore_idAndGoods_id(Integer store_id, Integer goods_id);
+
 }
