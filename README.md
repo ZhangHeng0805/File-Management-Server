@@ -1,6 +1,6 @@
 # [原项目参考](https://github.com/guangee/demo_upload)
 ## [文件管理系统成品下载(无需数据库)](https://github.com/ZhangHeng0805/File-Management-Server/releases/download/V1.0/default.zip)
-## [该项目的最新jar包](https://github.com/ZhangHeng0805/File-Management-Server/releases/download/V1.2/upload_locationr.jar)
+## [该项目的最新jar包](https://github.com/ZhangHeng0805/File-Management-Server/releases/download/V1.3/My-Server.jar)
 1. 原生上传
 2. Minio上传
 3. s3上传
@@ -114,7 +114,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50535
 File Encoding         : 65001
 
-Date: 2021-05-03 20:41:38
+Date: 2021-05-07 21:16:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -146,6 +146,16 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
+-- Table structure for delete_image
+-- ----------------------------
+DROP TABLE IF EXISTS `delete_image`;
+CREATE TABLE `delete_image` (
+  `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`image_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
 -- Table structure for goods
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
@@ -162,7 +172,7 @@ CREATE TABLE `goods` (
   `time` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`goods_id`),
   KEY `goods_name` (`goods_name`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for goods_list
@@ -184,7 +194,7 @@ CREATE TABLE `goods_list` (
   CONSTRAINT `goods_list_ibfk_1` FOREIGN KEY (`list_id`) REFERENCES `submit_goodslist` (`submit_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `goods_list_ibfk_2` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `goods_list_ibfk_3` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for location
