@@ -1,6 +1,9 @@
 package com.zhangheng.file.chat.ShopChat;
 
+import com.zhangheng.file.DemoUploadApplication;
+import com.zhangheng.file.entity.Delete_Image;
 import com.zhangheng.file.repository.CustomerRepository;
+import com.zhangheng.file.repository.DeleteImageRepository;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -11,6 +14,10 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.File;
+import java.util.List;
 
 
 public class ChatServer {
@@ -18,7 +25,8 @@ public class ChatServer {
     private int port;//端口号
     private int maxnum=100;//默认最大连接数
     private Logger log = LoggerFactory.getLogger(getClass());
-    private CustomerRepository customerRepository;
+    @Autowired
+    private DeleteImageRepository deleteImageRepository;
 
     public ChatServer(int port) {
         this.port = port;
@@ -61,4 +69,5 @@ public class ChatServer {
             bossGroup.shutdownGracefully();
         }
     }
+
 }

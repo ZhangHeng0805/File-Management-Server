@@ -1,14 +1,15 @@
 package com.zhangheng.file.controller;
 
+import com.zhangheng.file.entity.Delete_Image;
 import com.zhangheng.file.bean.Goods;
 import com.zhangheng.file.bean.GoodsOrder;
 import com.zhangheng.file.bean.Store;
 import com.zhangheng.file.bean.submitgoods.SubmitGoods;
 import com.zhangheng.file.bean.submitgoods.goods;
+import com.zhangheng.file.repository.DeleteImageRepository;
 import com.zhangheng.file.repository.GoodsRepository;
 import com.zhangheng.file.repository.ListGoodsRepository;
 import com.zhangheng.file.repository.SubmitGoodsRepository;
-import com.zhangheng.file.util.DigitalFormatUtil;
 import com.zhangheng.file.util.FiletypeUtil;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -35,6 +36,8 @@ public class TableController {
     private GoodsRepository goodsRepository;
     @Autowired
     private ListGoodsRepository listGoodsRepository;
+    @Autowired
+    private DeleteImageRepository deleteImageRepository;
     private static String baseDir = "files/goods/";
     Logger log = LoggerFactory.getLogger(getClass());
 
@@ -79,6 +82,7 @@ public class TableController {
     public String updataGoods(MultipartFile image, Goods goods, Model model,HttpServletRequest request){
         HttpSession session = request.getSession();
         Goods et_goods = (Goods) session.getAttribute("et_goods");
+        String p="files/";
         if (!image.isEmpty()){
             String fileType = FiletypeUtil.getFileType(image.getOriginalFilename());
             if (fileType.equals("image")) {
@@ -101,9 +105,16 @@ public class TableController {
                             File outFile = new File(baseDir + name);
                             try {
                                 FileUtils.copyToFile(image.getInputStream(), outFile);
-                                File file = new File("files/" + et_goods.getGoods_image());
+                                File file = new File(p + et_goods.getGoods_image());
                                 if (file.exists()) {
-                                    file.delete();
+                                    boolean delete = file.delete();
+                                    if (delete){
+                                        log.info("商品图片删除成功");
+                                    }else {
+                                        Delete_Image delete_image = new Delete_Image();
+                                        delete_image.setImage_url(p + et_goods.getGoods_image());
+                                        Delete_Image delete_image1 = deleteImageRepository.saveAndFlush(delete_image);
+                                    }
                                 }else {
                                     log.error("商品图片不存在");
                                 }

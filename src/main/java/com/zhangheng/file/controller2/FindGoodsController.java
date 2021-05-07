@@ -1,26 +1,24 @@
 package com.zhangheng.file.controller2;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.zhangheng.file.entity.Delete_Image;
 import com.zhangheng.file.bean.Goods;
 import com.zhangheng.file.bean.Store;
+import com.zhangheng.file.repository.DeleteImageRepository;
 import com.zhangheng.file.repository.GoodsRepository;
 import com.zhangheng.file.repository.StoreRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +29,8 @@ public class FindGoodsController {
     private GoodsRepository goodsRepository;
     @Autowired
     private StoreRepository storeRepository;
+    @Autowired
+    private DeleteImageRepository deleteImageRepository;
     @GetMapping("goodsfromstore_table")
     public String editable_table(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
@@ -64,10 +64,17 @@ public class FindGoodsController {
         if (byId.isPresent()) {
             File file = new File(p + byId.get().getGoods_image());
             if (file.exists()){
-                file.delete();
-                log.info("商品图片删除成功");
+                boolean delete = file.delete();
+                if (delete) {
+                    log.info("商品图片删除成功");
+                    msg="商品删除成功";
+                }else {
+                    Delete_Image delete_image = new Delete_Image();
+                    delete_image.setImage_url(p + byId.get().getGoods_image());
+                    Delete_Image delete_image1 = deleteImageRepository.save(delete_image);
+                }
                 goodsRepository.deleteByStore_idAndGoods_id(store_id,goods_id);
-                msg="商品删除成功";
+
             }else {
                 log.error("商品图片不存在");
                 msg="商品删除失败";

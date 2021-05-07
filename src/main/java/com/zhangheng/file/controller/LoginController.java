@@ -6,6 +6,7 @@ import com.zhangheng.file.bean.Merchants;
 import com.zhangheng.file.bean.Store;
 import com.zhangheng.file.bean.submitgoods.SubmitGoods;
 import com.zhangheng.file.bean.submitgoods.goods;
+import com.zhangheng.file.entity.Delete_Image;
 import com.zhangheng.file.entity.User;
 import com.zhangheng.file.repository.*;
 import com.zhangheng.file.util.DigitalFormatUtil;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -44,6 +46,8 @@ public class LoginController {
     private GoodsRepository goodsRepository;
     @Autowired
     private ListGoodsRepository listGoodsRepository;
+    @Autowired
+    private DeleteImageRepository deleteImageRepository;
 
     //登录页面
     @GetMapping(value = {"/","/Login"})
@@ -54,6 +58,7 @@ public class LoginController {
     @PostMapping("/Login")
     public String main(User user, HttpSession session, Model model){
         if (user.getUsername().length()>0&&user.getPassword().length()>0) {
+            delete_image();
             boolean b = merchantsRepository.existsById(user.getUsername());
             if (b) {
                 Optional<Merchants> user1 = merchantsRepository.findById(user.getUsername());
@@ -145,5 +150,20 @@ public class LoginController {
             request.getSession().removeAttribute(em.nextElement().toString());
         }
         return "redirect:Login";
+    }
+    //删除图片
+    public void delete_image(){
+        List<Delete_Image> all = deleteImageRepository.findAll();
+        if (all.size()>0){
+            for (Delete_Image d:all){
+                File file = new File(d.getImage_url());
+                boolean delete = file.delete();
+                if (delete){
+                    deleteImageRepository.delete(d);
+                }else {
+                    System.out.println("图片文件删除失败");
+                }
+            }
+        }
     }
 }

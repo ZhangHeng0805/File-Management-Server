@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <title>页面公共内容</title>
     <!--common-->
-    <link th:href="@{/static/css/style.css}" href="css/style.css" rel="stylesheet">
+    <div th:fragment="com_header">
+    <link th:href="@{/static/css/style.css}" rel="stylesheet">
     <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
-
+    </div>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="/static/js/html5shiv.js" th:src="@{/static/js/html5shiv.js}"></script>
-    <script src="/static/js/respond.min.js" th:src="@{/static/js/respond.min.js}"></script>
+    <div id="com_script">
+    <script th:src="@{/static/js/html5shiv.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/respond.min.js}"type="text/javascript"></script>
+    </div>
     <![endif]-->
 
 </head>
@@ -86,14 +89,10 @@
 
 <!-- 顶部菜单-->
 <div id="com_headermenu" class="header-section">
-
     <!--toggle button start-->
     <a class="toggle-btn"><i class="fa fa-bars"></i></a>
     <!--toggle button end-->
 
-<!--<div style="display: inline-block;text-align: center">-->
-
-<!--</div>-->
     <!--search start-->
 <!--    <form class="searchform" action="index.html" method="post">
         <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
@@ -101,7 +100,6 @@
     <!--search end-->
 
     <!--notification menu start -->
-
 
     <div class="menu-right">
         <ul class="notification-menu">
@@ -126,6 +124,8 @@
 <!-- header section end-->
 
 <div id="com_script">
+    <script th:src="@{/static/js/html5shiv.js}"></script>
+    <script th:src="@{/static/js/respond.min.js}"></script>
     <!-- Placed js at the end of the document so the pages load faster -->
     <script th:src="@{/static/js/jquery-1.10.2.min.js}"></script>
     <script th:src="@{/static/js/jquery-ui-1.9.2.custom.min.js}"></script>
