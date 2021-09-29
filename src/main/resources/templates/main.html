@@ -10,23 +10,25 @@
 
   <title>后台系统管理主页</title>
 
+
   <!--icheck-->
   <link th:href="@{/static/js/iCheck/skins/minimal/minimal.css}" rel="stylesheet">
   <link th:href="@{/static/js/iCheck/skins/square/square.css}" rel="stylesheet">
   <link th:href="@{/static/js/iCheck/skins/square/red.css}" rel="stylesheet">
   <link th:href="@{/static/js/iCheck/skins/square/blue.css}" rel="stylesheet">
-
+    <!--responsive table-->
+    <link href="/static/css/table-responsive.css" rel="stylesheet" />
   <!--dashboard calendar-->
   <link th:href="@{/static/css/clndr.css}" rel="stylesheet">
-
+    <link th:include="common :: com_header">
   <!--Morris Chart CSS -->
   <link rel="stylesheet" th:href="@{/static/js/morris-chart/morris.css}">
-    <link th:include="common :: com_header">
 </head>
 
 <body class="sticky-header">
 
 <section>
+    <!-- left side start-->
     <div th:replace="common :: #com_leftmenu"></div>
     
     <!-- main content start-->
@@ -40,6 +42,9 @@
                 店铺详情
             </h3>
             <ul class="breadcrumb">
+                <li>
+                    <img style="height: 60px" th:src="@{'/downloads/show/'+${session.store.store_image}}" th:alt="${session.store.store_name}" />
+                </li>
                 <li>
                     <a th:text="${Store_name}"></a>
                 </li>
@@ -136,16 +141,17 @@
 
             <div class="row">
                 <div class="col-md-12">
+
                     <section class="panel">
                         <header class="panel-heading">
-                            未处理的商品订单
+                            未处理的商品订单([[${submitGoodsList.size()}]]条）
                             <span class="tools pull-right">
                         <a href="javascript:;" class="fa fa-chevron-down"></a>
                                 <!--                        <a href="javascript:;" class="fa fa-times"></a>-->
                      </span>
                         </header>
                         <div class="panel-body">
-                            <div class="adv-table editable-table ">
+                            <div class="adv-table editable-table">
                                 <div class="clearfix">
                                     <!--<div class="btn-group">
                                         <button class="btn btn-primary">&lt;!&ndash;id="editable-sample_new"&ndash;&gt;
@@ -159,8 +165,10 @@
                                     <label th:if="${code}==403"class="label label-warning">错误，该店铺ID为空</label>
                                 </div>-->
 
-                                <table align="center" class="table table-striped table-hover table-bordered" id="editable-sample" >
-                                    <thead>
+                                <section id="no-more-tables">
+<!--                                <table class="table table-striped table-hover table-bordered" id="editable-sample" >-->
+                                <table class="table table-bordered table-striped table-condensed cf" id="editable-sample">
+                                    <thead class="cf">
                                     <tr>
                                         <th style="text-align: center">订单时间</th>
                                         <th style="text-align: center">收货人</th>
@@ -177,21 +185,22 @@
                                     </thead>
                                     <tbody>
                                     <tr class=""th:each="goods:${submitGoodsList}" style="text-align: center">
-                                        <td style="text-align: center" th:text="${goods.time}">订单编号</td>
-                                        <td style="text-align: center ;height: auto" th:text="${goods.name}">收货人</td>
-                                        <td style="text-align: center;height: auto;width: auto;margin: auto"  th:text="${goods.address}">收货地址</td>
-                                        <td style="text-align: center" th:text="${goods.phone}"></td>
-                                        <td style="text-align: center" class="center" >[[${goods.goods_id}]]</td>
-                                        <td style="text-align: center" class="center" >[[${goods.goods_name}]]</td>
-                                        <td style="text-align: center" class="center" >[[${goods.goods_price}]]</td>
-                                        <td style="text-align: center" class="center" >[[${goods.num}]]</td>
-                                        <td style="text-align: center" class="center" >[[${#numbers.formatDecimal(goods.goods_price*goods.num,1,'COMMA',2,'POINT')}]]</td>
-                                        <td><a class="btn btn-sm btn-search e1" th:attr="put_url=@{/Order_Confirm/}+${goods.submit_id}+'/'+${goods.goods_id}">确认</a></td>
-                                        <td><a class="btn btn-sm btn-danger d1" th:attr="del_url=@{/Order_Refused/}+${goods.submit_id}+'/'+${goods.goods_id}">拒绝</a></td>
+                                        <td data-title="订单时间" style="text-align: center" th:text="${goods.time}">订单时间</td>
+                                        <td data-title="收货人" style="text-align: center ;height: auto" th:text="${goods.name}">收货人</td>
+                                        <td data-title="收货地址" style="text-align: center;height: auto;width: auto;margin: auto"  th:text="${goods.address}">收货地址</td>
+                                        <td data-title="联系电话" style="text-align: center" th:text="${goods.phone}"></td>
+                                        <td data-title="商品id" style="text-align: center" class="center" >[[${goods.goods_id}]]</td>
+                                        <td data-title="商品名" style="text-align: center" class="center" >[[${goods.goods_name}]]</td>
+                                        <td data-title="单价" style="text-align: center" class="center" >[[${goods.goods_price}]]</td>
+                                        <td data-title="数量" style="text-align: center" class="center" >[[${goods.num}]]</td>
+                                        <td data-title="总价" style="text-align: center" class="center" >[[${#numbers.formatDecimal(goods.goods_price*goods.num,1,'COMMA',2,'POINT')}]]</td>
+                                        <td data-title="确认订单" style="text-align: center"><a class="btn btn-sm btn-search e1" th:attr="put_url=@{/Order_Confirm/}+${goods.submit_id}+'/'+${goods.goods_id}">确认</a></td>
+                                        <td data-title="拒绝订单" style="text-align: center"><a class="btn btn-sm btn-danger d1" th:attr="del_url=@{/Order_Refused/}+${goods.submit_id}+'/'+${goods.goods_id}">拒绝</a></td>
                                     </tr>
 
                                     </tbody>
                                 </table>
+                                </section>
                                 <form id="putEmpRorm" th:method="${'post'}"></form>
                                 <form id="delEmpRorm" th:method="${'post'}"></form>
                             </div>
@@ -204,8 +213,6 @@
             </div>
 
         </div>
-
-
 
     </div>
     <!-- main content end-->
@@ -226,9 +233,10 @@
         return false;
     });
 </script>
+
 <!--easy pie chart-->
 <script th:src="@{/static/js/easypiechart/jquery.easypiechart.js}"></script>
-<script th:src="@{/static/img/js/jquery-3.2.1.slim.min.js}"></script>
+<!--<script th:src="@{/static/img/js/jquery-3.2.1.slim.min.js}"></script>-->
 <script th:src="@{/static/js/easypiechart/easypiechart-init.js}"></script>
 
 <!--Sparkline Chart-->
@@ -256,7 +264,7 @@
 <script th:src="@{http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js}"></script>
 
 <!--common scripts for all pages-->
-<script th:src="@{/static/js/scripts.js}"></script>
+<!--<script th:src="@{/static/js/scripts.js}"></script>-->
 
 <!--Dashboard Charts-->
 <script th:src="@{/static/js/dashboard-chart-init.js}"></script>

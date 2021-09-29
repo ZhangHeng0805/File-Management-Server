@@ -120,4 +120,21 @@ public class Merchants {
     public void setTime(String time) {
         this.time = time;
     }
+
+    @Override
+    public String toString() {
+        return "Merchants{" +
+                "phonenum='" + phonenum + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                ", store_name='" + store_name + '\'' +
+                ", store_introduce='" + store_introduce + '\'' +
+                ", store_id=" + store_id +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }

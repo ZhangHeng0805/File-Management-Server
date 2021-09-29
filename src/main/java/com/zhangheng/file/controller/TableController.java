@@ -158,5 +158,10 @@ public class TableController {
         model.addAttribute("active","3");
         return "table/responsive_table";
     }
+    @GetMapping("modify_account")
+    public String modify_account(Model model){
+        model.addAttribute("active","0");
+        return "table/modify_account";
+    }
 
 }

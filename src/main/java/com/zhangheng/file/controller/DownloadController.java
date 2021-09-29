@@ -7,6 +7,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,6 +49,8 @@ public class DownloadController {
                 response.sendError(500,e.toString());
             }
             model.put("err1","错误："+e.getMessage());
+        }finally {
+
         }
     }
 
@@ -81,6 +84,8 @@ public class DownloadController {
             log.error("错误："+e.getMessage());
             result.setMessage(e.getMessage());
 //            e.printStackTrace();
+        }finally {
+            input.close();
         }
         return result;
     }
@@ -88,7 +93,7 @@ public class DownloadController {
     @GetMapping("downupdate/update/{type}/{name}")
     public Result downupdate(@Nullable @PathVariable("type") String type,
                              @Nullable @PathVariable("name") String name,
-                             HttpServletResponse response){
+                             HttpServletResponse response) throws IOException {
         Result result=new Result();
         if (type.length()>0){
             File file = new File("update/"+type+"/"+name);
@@ -109,6 +114,8 @@ public class DownloadController {
                 }
                 log.error("错误："+e.getMessage());
                 result.setMessage(e.getMessage());
+            }finally {
+                input.close();
             }
         }else {
             result.setTitle("内容为空");
