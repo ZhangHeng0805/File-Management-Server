@@ -5,6 +5,9 @@
     <title>页面公共内容</title>
     <!--common-->
     <div th:fragment="com_header">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="ThemeBucket">
     <link th:href="@{/static/css/style.css}" rel="stylesheet">
     <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
     </div>
@@ -97,7 +100,6 @@
     <!--search end-->
 
     <!--notification menu start -->
-
     <div class="menu-right">
         <ul class="notification-menu">
             <li>
@@ -109,14 +111,59 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                     <li><a th:href="@{/modify_account}"><i class="fa fa-cog"></i>  账户设置</a></li>
+                    <li><a data-toggle="modal" href="#myModal"><i class="fa fa-unlock-alt"></i>  修改密码</a></li>
                     <li><a th:href="@{/exit}"><i class="fa fa-sign-out"></i> 退出登录</a></li>
                 </ul>
             </li>
+            <!-- Modal -->
+            <div aria-hidden="true" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">修改密码</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" th:action="@{#}" role="form" method="post" onsubmit="return submit()">
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-sm-2 control-label">旧密码</label>
+                                    <div class="col-lg-10">
+                                        <input type="password" name="pwd1"class="form-control" id="password1" placeholder="请输入旧密码" required>
+                                        <p class="help-block">（字数限制6~20字）</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-sm-2 control-label">新密码</label>
+                                    <div class="col-lg-10">
+                                        <input type="password" name="pwd2"class="form-control" id="password2" placeholder="请输入新密码" required>
+                                        <p class="help-block">（字数限制6~20字）</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-sm-2 control-label">再次确认</label>
+                                    <div class="col-lg-10">
+                                        <input type="password" name="pwd3"class="form-control" id="password3" placeholder="请再次输入新密码" required>
+                                        <p class="help-block">（字数限制6~20字）</p>
+                                    </div>
+                                </div>
+                            </form>
+                            <script>
+                                function submit() {
 
+                                }
+                            </script>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                            <!--<button class="btn btn-primary" type="button">提交</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
         </ul>
     </div>
     <!--notification menu end -->
-
 </div>
 <!-- header section end-->
 

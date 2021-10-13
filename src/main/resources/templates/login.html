@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -9,13 +9,13 @@
 
     <title>用户登录</title>
 
-    <link th:href="@{/static/css/style.css}" href="css/style.css" rel="stylesheet">
+    <link th:href="@{/static/css/style.css}" href="/static/css/style.css" rel="stylesheet">
     <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+    <script src="/static/js/respond.min.js"></script>
 
     <![endif]-->
     <script type="text/javascript">
@@ -48,7 +48,12 @@
             <img src="/static/images/login-logo.png" th:src="@{/static/images/login-logo.png}" alt=""/>
         </div>
         <div class="login-wrap">
-            <label style="color: red" th:text="${msg}" th:if="${msg}!=null"></label>
+            <div th:class="${code}==200?'alert alert-success fade in':'alert alert-danger fade in'" th:if="${msg}!=null">
+                <button type="button" class="close close-sm" data-dismiss="alert">
+                    <i class="fa fa-times"></i>
+                </button>
+            <label th:color="${code}==200?'green':'red'" th:text="${msg}"></label>
+            </div>
             <input type="text" name="username" class="form-control" placeholder="请输入手机号码" autofocus>
             <input type="password" name="password" class="form-control" placeholder="请输入密码">
 
@@ -65,14 +70,11 @@
             <label class="checkbox">
                 <!--<input type="checkbox" value="remember-me"> 记住我-->
                 <span class="pull-right">
-                    <a data-toggle="modal" href="#myModal"> 忘记密码?</a>
-
+                    <a data-toggle="modal" href="#myModal">忘记密码?</a>
                 </span>
             </label>
 
         </div>
-
-
         <!-- Modal -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
             <div class="modal-dialog">
@@ -89,7 +91,7 @@
                         3.手机号码<br>
                         如果信息验证正确，则会以邮件的形式将密码发送到对应的账号邮箱<br>
                         </p>
-<!--                        <input type="text" name="email" placeholder="Email邮箱" autocomplete="off" class="form-control placeholder-no-fix">-->
+                        <!--                        <input type="text" name="email" placeholder="Email邮箱" autocomplete="off" class="form-control placeholder-no-fix">-->
                         <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=wriqo6ylqqespezy_vL3grOz7KGtrw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_22.png"/></a>
                     </div>
                     <div class="modal-footer">
@@ -100,7 +102,6 @@
             </div>
         </div>
         <!-- modal -->
-
     </form>
 
 </div>
